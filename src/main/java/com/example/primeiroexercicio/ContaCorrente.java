@@ -33,21 +33,20 @@ public class ContaCorrente {
     }
 
     public void transferencia(float valor, int id){
-        banco.contaCorrentes.get(1).setSaldo(300 + banco.contaCorrentes.get(1).getSaldo());
-
-        //int aux = 1;
-        /*for(int i = 0; i < banco.contaCorrentes.size(); i++){
+        int aux = 1;
+        for(int i = 0; i < banco.contaCorrentes.size(); i++){
             if(id == banco.contaCorrentes.get(i).getId()){
                 aux = 1;
             }
         }
         if (aux == 1){
             banco.contaCorrentes.get(id).setSaldo(valor + banco.contaCorrentes.get(id).getSaldo());
+            this.saldo -= valor;
             System.out.println("Transferência de R$ " +valor+ " realizada com sucesso");
         }
         else{
             System.out.println("Uma conta com este número de ID não existe em nosso Banco de Dados");
-        }*/
+        }
     }
     public ContaCorrente(float saldo, Cliente cliente, Banco banco) {
         this.banco = banco;

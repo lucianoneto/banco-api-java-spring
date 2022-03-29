@@ -9,17 +9,10 @@ import lombok.Setter;
 
 public class Cliente {
     private String nome;
-    private int CPF;
+    private long CPF;
     private String telefone;
     private String endereco;
     private int id;
-
-    public Cliente(String nome, int CPF, String telefone, String endereco) {
-        this.nome = nome;
-        this.CPF = CPF;
-        this.telefone = telefone;
-        this.endereco = endereco;
-    }
 
     @Override
     public String toString() {
