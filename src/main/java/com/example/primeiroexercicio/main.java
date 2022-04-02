@@ -9,6 +9,7 @@ public class main {
         Banco banco = new Banco();
         String menu = null;
         Scanner teclado = new Scanner(System.in);
+        Scanner tecladoMenu = new Scanner(System.in);
         int id = 0;
         float valor;
 
@@ -24,12 +25,12 @@ public class main {
                 System.out.println("5- Saldo");
                 System.out.println("6- SAIR");
 
-            menu = "null";
-            menu = teclado.nextLine();
+            menu = tecladoMenu.nextLine();
 
             switch (menu){
                 case "1": {
                     System.out.print("Digite o seu nome: ");
+                    teclado.next();
                     cliente.setNome(teclado.nextLine());
                     System.out.print("Digite o seu endereço: ");
                     cliente.setEndereco(teclado.nextLine());
@@ -45,7 +46,7 @@ public class main {
                     id = teclado.nextInt();
                     System.out.print("Valor: ");
                     valor = teclado.nextFloat();
-                    banco.contaCorrentes.get(id).deposito(valor,id);
+                    banco.contaCorrentes.get(id-1).deposito(valor,id-1);
                     break;
                 }
                 case "3":{
@@ -53,7 +54,7 @@ public class main {
                     id = teclado.nextInt();
                     System.out.print("Valor: ");
                     valor = teclado.nextFloat();
-                    banco.contaCorrentes.get(id).saque(valor,id);
+                    banco.contaCorrentes.get(id-1).saque(valor,id-1);
                     break;
                 }
                 case "4":{
@@ -63,13 +64,13 @@ public class main {
                     int id2 = teclado.nextInt();
                     System.out.print("Valor: ");
                     valor = teclado.nextFloat();
-                    banco.contaCorrentes.get(id).transferencia(valor,id,id2);
+                    banco.contaCorrentes.get(id-1).transferencia(valor,id-1,id2-1);
                     break;
                 }
                 case "5":{
                     System.out.print("Id da para ver o saldo: ");
                     id = teclado.nextInt();
-                    banco.contaCorrentes.get(id).informacoesConta(id);
+                    banco.contaCorrentes.get(id-1).informacoesConta(id-1);
                     break;
                 }
                 case "6":{
@@ -84,7 +85,6 @@ public class main {
 
             }
         }while(menu!="6");
-
 
 
     }
