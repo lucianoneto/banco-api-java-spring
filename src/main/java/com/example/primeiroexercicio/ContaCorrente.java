@@ -16,32 +16,33 @@ public class ContaCorrente {
     Banco banco;
     Cliente cliente;
 
-    public void informacoesConta(){
-        System.out.println(cliente.toString());
-    }
-    public void printaSaldo(){
-        System.out.println("Saldo atual: R$" +this.saldo);
-    }
-    public void deposito(float valor){
-        this.saldo+=valor;
-        System.out.println("Valor R$" +valor+ " depositado com sucesso");
-        System.out.println("Saldo atual: R$" +this.saldo);
+    public void informacoesConta(int id){
+        System.out.println(banco.contaCorrentes.get(id).getSaldo());
     }
 
-    public void saque(float valor){
-        this.saldo-=valor;
+
+    public void deposito(float valor, int id){
+        banco.contaCorrentes.get(id).setSaldo(banco.contaCorrentes.get(id).getSaldo() + valor);
+        System.out.println("Valor R$" +valor+ " depositado com sucesso!");
+        System.out.println("Saldo atual: R$" +banco.contaCorrentes.get(id).getSaldo());
     }
 
-    public void transferencia(float valor, int id){
+    public void saque(float valor, int id){
+        banco.contaCorrentes.get(id).setSaldo(banco.contaCorrentes.get(id).getSaldo() - valor);
+        System.out.println("Valor R$" +valor+ " sacado com sucesso!");
+        System.out.println("Saldo atual: R$" +banco.contaCorrentes.get(id).getSaldo());
+    }
+
+    public void transferencia(float valor, int idTransfere,int idRecebe){
         int aux = 1;
         for(int i = 0; i < banco.contaCorrentes.size(); i++){
-            if(id == banco.contaCorrentes.get(i).getId()){
+            if(idRecebe == banco.contaCorrentes.get(i).getId()){
                 aux = 1;
             }
         }
         if (aux == 1){
-            banco.contaCorrentes.get(id).setSaldo(valor + banco.contaCorrentes.get(id).getSaldo());
-            this.saldo -= valor;
+            banco.contaCorrentes.get(idRecebe).setSaldo(valor + banco.contaCorrentes.get(idRecebe).getSaldo());
+            banco.contaCorrentes.get(idTransfere).setSaldo(banco.contaCorrentes.get(idTransfere).getSaldo() - valor);
             System.out.println("Transferência de R$ " +valor+ " realizada com sucesso");
         }
         else{
@@ -54,4 +55,5 @@ public class ContaCorrente {
         this.cliente = cliente;
         this.id = ++count;
     }
+
 }

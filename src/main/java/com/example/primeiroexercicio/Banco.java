@@ -10,6 +10,6 @@ public class Banco {
         cliente.setId(contaCorrente.getId());
         contaCorrente.setSaldo(50);
         contaCorrentes.add(contaCorrente);
-        System.out.println(contaCorrentes.size());
+        System.out.println("Conta criada com sucesso!");
     }
 }
