@@ -14,7 +14,7 @@ public class main {
         float valor;
 
 
-        System.out.println("B E M  V I N D O S  A O  ****** B A N C O  M U N D I A L ******!");
+        System.out.println("B E M  V I N D O S  A O  ****** B A N C O  M U N D I A L ! ******");
 
         do {
             System.out.println("Escolha a baixo o que deseja fazer:");
