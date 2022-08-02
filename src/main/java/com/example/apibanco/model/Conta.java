@@ -1,4 +1,4 @@
-package com.example.primeiroexercicio.model;
+package com.example.apibanco.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;

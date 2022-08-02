@@ -1,10 +1,9 @@
-package com.example.primeiroexercicio.model;
+package com.example.apibanco.model;
 
-import com.sun.istack.NotNull;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-
 
 @Getter
 @Setter
@@ -20,17 +19,20 @@ public class Cliente {
     @Column(nullable = false)
     private String nome;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private Long CPF;
 
     @Column(nullable = false)
     private String telefone;
 
     @Column(nullable = false)
-    private String endereco;
-
-    @Column(nullable = false)
     private String tipoConta;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "gerente_id")
+    private Gerente gerente;
+
 
 }
 
