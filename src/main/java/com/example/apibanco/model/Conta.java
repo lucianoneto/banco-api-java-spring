@@ -25,4 +25,5 @@ public class Conta {
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
+
 }

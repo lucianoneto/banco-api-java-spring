@@ -1,7 +1,10 @@
 package com.example.apibanco.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -32,7 +35,6 @@ public class Cliente {
     @ManyToOne
     @JoinColumn(name = "gerente_id")
     private Gerente gerente;
-
 
 }
 

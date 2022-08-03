@@ -19,16 +19,16 @@ public class ClienteEndereco {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String logradouro;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String setor;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String numero;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private Long CEP;
 
     @JsonIgnore
