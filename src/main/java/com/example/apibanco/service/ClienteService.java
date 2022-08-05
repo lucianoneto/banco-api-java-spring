@@ -23,13 +23,13 @@ public class ClienteService {
 
     @Transactional
     public Cliente salvarCliente(ClienteInput clienteInput, Long gerente_id) {
-        if (clienteInput.getCliente().getCPF() != null && clienteInput.getCliente().getNome() != null && clienteInput.getCliente().getTelefone() != null && clienteInput.getCliente().getTipoConta() != null) {
+//        if (clienteInput.getCliente().getCPF() != null && clienteInput.getCliente().getNome() != null && clienteInput.getCliente().getTelefone() != null && clienteInput.getCliente().getTipoConta() != null) {
             contaService.salvarConta(new Conta(), clienteInput);
             clienteInput.getCliente().setGerente(gerenteRepository.getById(gerente_id));
             clienteEnderecoService.salvarEnderecoCliente(clienteInput);
             return clienteRepository.save(clienteInput.getCliente());
-        }
-        return null;
+//        }
+//        return null;
     }
 
     public List<Cliente> mostrarClientes() {

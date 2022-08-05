@@ -1,17 +1,16 @@
 package com.example.apibanco.utils;
 
+import com.example.apibanco.repository.transactions.DepositoRepository;
+import lombok.AllArgsConstructor;
+
 import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
+@AllArgsConstructor
 public class Utils {
-    public static String dateTimeNow(LocalDateTime dataHoraAtual) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-        return dataHoraAtual.format(formatter);
-    }
+    DepositoRepository depositoRepository;
 
     public static java.sql.Date dateNow() {
         return Date.valueOf(LocalDate.now());

@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -25,7 +26,7 @@ public class GerenteController {
 
     @Transactional
     @PostMapping
-    public ResponseEntity<Gerente> adicionarGerente(@RequestBody Gerente gerente) {
+    public ResponseEntity<Gerente> adicionarGerente(@Valid @RequestBody Gerente gerente) {
         if (gerenteService.salvarGerente(gerente) != null)
             return new ResponseEntity<>(gerente, HttpStatus.CREATED);
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -38,7 +39,7 @@ public class GerenteController {
 
     @Transactional
     @PostMapping("/addCliente/{gerente_id}")
-    public ResponseEntity<ClienteInput> adicionarCliente(@RequestBody ClienteInput clienteInput, @PathVariable Long gerente_id) {
+    public ResponseEntity<ClienteInput> adicionarCliente(@Valid @RequestBody ClienteInput clienteInput, @PathVariable Long gerente_id) {
         modelMapper.map(clienteInput, ClienteInput.class);
         if (gerenteService.verificaGerente(gerente_id) && clienteService.salvarCliente(clienteInput, gerente_id) != null)
             return new ResponseEntity<>(clienteInput, HttpStatus.CREATED);

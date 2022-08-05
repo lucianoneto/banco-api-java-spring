@@ -1,9 +1,9 @@
-package com.example.apibanco.service;
+package com.example.apibanco.service.transactions;
 
 import com.example.apibanco.model.Conta;
 import com.example.apibanco.model.transactions.Deposito;
 import com.example.apibanco.repository.ContaRepository;
-import com.example.apibanco.repository.DepositoRepository;
+import com.example.apibanco.repository.transactions.DepositoRepository;
 import com.example.apibanco.utils.Utils;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

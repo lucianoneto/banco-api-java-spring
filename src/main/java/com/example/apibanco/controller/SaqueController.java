@@ -2,7 +2,7 @@ package com.example.apibanco.controller;
 
 import com.example.apibanco.model.transactions.Saque;
 import com.example.apibanco.service.ContaService;
-import com.example.apibanco.service.SaqueService;
+import com.example.apibanco.service.transactions.SaqueService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

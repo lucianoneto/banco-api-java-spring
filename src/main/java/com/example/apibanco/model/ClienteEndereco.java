@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Getter
 @Setter
@@ -19,17 +21,21 @@ public class ClienteEndereco {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @NotBlank
+    @Size(max = 70)
     private String logradouro;
 
-    @Column(nullable = false)
+    @NotBlank
+    @Size(max = 40)
     private String setor;
 
-    @Column(nullable = false)
+    @NotBlank
+    @Size(max = 8)
     private String numero;
 
-    @Column(nullable = false)
-    private Long CEP;
+    @NotBlank
+    @Size(max = 8, min = 8)
+    private String CEP;
 
     @JsonIgnore
     @OneToOne

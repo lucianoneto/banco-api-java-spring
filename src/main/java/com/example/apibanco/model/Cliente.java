@@ -5,8 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 @Getter
 @Setter
@@ -19,16 +22,26 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @NotBlank
+    @Size(max = 70)
     private String nome;
 
-    @Column(nullable = false, unique = true)
-    private Long CPF;
+    @NotBlank
+    @Size(max = 11, min = 11)
+    @CPF(message="cpf registered in the database")
+    private String CPF;
 
-    @Column(nullable = false)
+    @NotBlank
+    @Size(max = 20)
     private String telefone;
 
-    @Column(nullable = false)
+    @Email
+    @NotBlank
+    @Size(max = 256)
+    private String email;
+
+    @NotBlank
+    @Size(max = 20)
     private String tipoConta;
 
     @JsonIgnore

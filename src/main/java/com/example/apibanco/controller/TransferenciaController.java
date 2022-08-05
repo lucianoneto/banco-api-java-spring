@@ -1,8 +1,7 @@
 package com.example.apibanco.controller;
 
-import com.example.apibanco.model.transactions.Deposito;
 import com.example.apibanco.service.ContaService;
-import com.example.apibanco.service.transactions.DepositoService;
+import com.example.apibanco.service.transactions.TransferenciaService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,18 +14,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/conta")
-public class DepositoController {
+public class TransferenciaController {
 
     private ContaService contaService;
 
-    private DepositoService depositoService;
+    private TransferenciaService transferenciaService;
 
     @Transactional
-    @PostMapping("/deposito/{cliente_id}/{deposito}")
-    public ResponseEntity<String> depositar(@PathVariable Long cliente_id, @PathVariable Float deposito) {
-        if (contaService.verificaObjeto(cliente_id))
-            return new ResponseEntity<>(depositoService.salvarDeposito(cliente_id, deposito, new Deposito()), HttpStatus.OK);
+    @PostMapping("/{idOrigem}/{idDestino}/{valor}")
+    public ResponseEntity<String> transferencia(@PathVariable Long idOrigem, @PathVariable Long idDestino, @PathVariable Float valor) {
+        if (contaService.verificaObjeto(idOrigem) && contaService.verificaObjeto(idDestino))
+            return new ResponseEntity<>(transferenciaService.salvarTransferencia(idOrigem, idDestino, valor), HttpStatus.OK);
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
     }
 
 }

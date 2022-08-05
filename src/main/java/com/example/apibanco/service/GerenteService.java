@@ -14,9 +14,7 @@ public class GerenteService {
 
     @Transactional
     public Gerente salvarGerente(Gerente gerente) {
-        if (gerente.getNome() != null && gerente.getCPF() != null)
-            return gerenteRepository.save(gerente);
-        return null;
+        return gerenteRepository.save(gerente);
     }
 
     public boolean verificaGerente(Long gerente_id) {
