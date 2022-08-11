@@ -1,7 +1,7 @@
 package com.example.apibanco.service;
 
+import com.example.apibanco.model.Cliente;
 import com.example.apibanco.model.Conta;
-import com.example.apibanco.model.input.ClienteInput;
 import com.example.apibanco.model.input.ExtratoInput;
 import com.example.apibanco.repository.ContaRepository;
 import com.example.apibanco.repository.transactions.DepositoRepository;
@@ -23,13 +23,13 @@ public class ContaService {
     private TransferenciaRepository transferenciaRepository;
 
     @Transactional
-    public void salvarConta(Conta conta, ClienteInput clienteInput) {
-        conta.setSaldo(0F);
-        conta.setDataCriacao(Utils.dateNow());
-        conta.setHoraCriacao(Utils.timeNow());
-        conta.setCliente(clienteInput.getCliente());
-
-        contaRepository.save(conta);
+    public void salvarConta(Cliente cliente) {
+        contaRepository.save(Conta.builder()
+                .saldo(0F)
+                .dataCriacao(Utils.dateNow())
+                .horaCriacao(Utils.timeNow())
+                .cliente(cliente)
+                .build());
     }
 
     public ExtratoInput mostrarExtrato(Long cliente_id) {
@@ -37,8 +37,8 @@ public class ContaService {
                 .conta(contaRepository.getById(cliente_id))
                 .depositos(depositoRepository.getByConta_Id(cliente_id))
                 .saques(saqueRepository.getByConta_Id(cliente_id))
-                .transferenciasOrigem(transferenciaRepository.getByContaOrigemId(cliente_id))
-                .transferenciasDestino(transferenciaRepository.getByContaDestinoId(cliente_id))
+                .transferenciasEnviadas(transferenciaRepository.getByContaOrigemId(cliente_id))
+                .transferenciasRecebidas(transferenciaRepository.getByContaDestinoId(cliente_id))
                 .build();
     }
 

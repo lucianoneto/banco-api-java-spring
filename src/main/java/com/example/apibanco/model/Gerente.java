@@ -1,9 +1,6 @@
 package com.example.apibanco.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
@@ -15,6 +12,7 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 @Entity
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Gerente {
@@ -29,9 +27,9 @@ public class Gerente {
 
     @NotBlank
     @Size(max = 11, min = 11)
-    @CPF(message="cpf registered in the database")
+    @CPF(message = "invalid cpf")
     @Column(unique = true)
-    private String CPF;
+    private String cpf;
 
     @NotBlank
     @Size(max = 20)
@@ -40,7 +38,7 @@ public class Gerente {
     @Email
     @NotBlank
     @Size(max = 256)
+    @Column(unique = true)
     private String email;
-
 
 }

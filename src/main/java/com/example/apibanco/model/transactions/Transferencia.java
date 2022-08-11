@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.sql.Date;
 import java.sql.Time;
 
@@ -19,9 +20,11 @@ import java.sql.Time;
 public class Transferencia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Long id;
 
     @Column(name = "transferencia_valor")
+    @Min(1)
     private Float valor;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
@@ -37,7 +40,6 @@ public class Transferencia {
     @JoinColumn(name = "conta_origem_id")
     private Conta contaOrigem;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "conta_destino_id")
     private Conta contaDestino;

@@ -21,9 +21,9 @@ public class ExtratoInput {
 
     private List<Saque> saques;
 
-    private List<Transferencia> transferenciasDestino;
+    private List<Transferencia> transferenciasEnviadas;
 
-    private List<Transferencia> transferenciasOrigem;
+    private List<Transferencia> transferenciasRecebidas;
 
 
 }

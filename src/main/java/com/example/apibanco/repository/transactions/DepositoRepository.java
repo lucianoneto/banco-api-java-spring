@@ -10,5 +10,6 @@ import java.util.List;
 @Repository
 public interface DepositoRepository extends JpaRepository<Deposito, Long> {
     Deposito getById(Long id);
+
     List<Deposito> getByConta_Id(Long id);
 }

@@ -2,10 +2,7 @@ package com.example.apibanco.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -16,6 +13,7 @@ import java.sql.Time;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 public class Conta {
 
     @Id

@@ -1,5 +1,6 @@
 package com.example.apibanco.service.transactions;
 
+import com.example.apibanco.exception.NegocioException;
 import com.example.apibanco.model.Conta;
 import com.example.apibanco.model.transactions.Saque;
 import com.example.apibanco.repository.ContaRepository;
@@ -9,6 +10,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
+
 @Service
 @AllArgsConstructor
 public class SaqueService {
@@ -16,19 +19,26 @@ public class SaqueService {
     private SaqueRepository saqueRepository;
 
     @Transactional
-    public String salvarSaque(Long cliente_id, Float valorSaque, Saque saque) {
+    public String salvarSaque(Long cliente_id, Float valorSaque) {
         Conta conta = contaRepository.getById(cliente_id);
-        if (conta.getSaldo() >= valorSaque) {
-            saque.setValor(valorSaque);
-            saque.setData(Utils.dateNow());
-            saque.setHorario(Utils.timeNow());
-            saque.setConta(conta);
-            conta.setSaldo(conta.getSaldo() - saque.getValor());
-            saqueRepository.save(saque);
-            contaRepository.save(conta);
+        HashMap<String, String> camposInvalidos = new HashMap<>();
 
-            return "Saldo atual: " + conta.getSaldo();
+        if (valorSaque < 1 || conta.getSaldo() < valorSaque) {
+            camposInvalidos.put("valorSaque", "Invalid value of bank draft.");
+            throw new NegocioException("One or more fields are invalid.", camposInvalidos);
         }
-        return "Saldo inválido, o valor na conta é menor do que o requisitado";
+        Saque saque = Saque.builder()
+                .valor(valorSaque)
+                .data(Utils.dateNow())
+                .horario(Utils.timeNow())
+                .conta(conta)
+                .build();
+
+        conta.setSaldo(conta.getSaldo() - saque.getValor());
+        saqueRepository.save(saque);
+        contaRepository.save(conta);
+
+        return "Saldo atual: " + conta.getSaldo();
+
     }
 }

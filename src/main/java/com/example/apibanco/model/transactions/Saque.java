@@ -3,12 +3,10 @@ package com.example.apibanco.model.transactions;
 import com.example.apibanco.model.Conta;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.sql.Date;
 import java.sql.Time;
 
@@ -16,13 +14,16 @@ import java.sql.Time;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 public class Saque {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Long id;
 
     @Column(name = "saque_valor")
+    @Min(1)
     private Float valor;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
