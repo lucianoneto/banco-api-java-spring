@@ -3,23 +3,20 @@ package com.example.apibanco.model.transactions;
 import com.example.apibanco.model.Conta;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import java.sql.Date;
 import java.sql.Time;
 
-
+@Table(name = "transferencia")
+@Entity
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@Entity
-@Builder
-public class Transferencia {
+public class TransferenciaRecebida {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore
     private Long id;
 
@@ -39,6 +36,7 @@ public class Transferencia {
     @JoinColumn(name = "conta_origem_id")
     private Conta contaOrigem;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "conta_destino_id")
     private Conta contaDestino;

@@ -46,7 +46,6 @@ public class TransferenciaService {
 
         contaRepository.save(contaDestino);
         transferenciaRepository.save(transferencia);
-
         return "Saldo atual: " + contaOrigem.getSaldo();
 
     }

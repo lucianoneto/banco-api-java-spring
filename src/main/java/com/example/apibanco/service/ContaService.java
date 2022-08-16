@@ -4,9 +4,7 @@ import com.example.apibanco.model.Cliente;
 import com.example.apibanco.model.Conta;
 import com.example.apibanco.model.input.ExtratoInput;
 import com.example.apibanco.repository.ContaRepository;
-import com.example.apibanco.repository.transactions.DepositoRepository;
-import com.example.apibanco.repository.transactions.SaqueRepository;
-import com.example.apibanco.repository.transactions.TransferenciaRepository;
+import com.example.apibanco.repository.transactions.*;
 import com.example.apibanco.utils.Utils;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,8 +17,10 @@ public class ContaService {
     private ContaRepository contaRepository;
     private DepositoRepository depositoRepository;
     private SaqueRepository saqueRepository;
-
     private TransferenciaRepository transferenciaRepository;
+
+    private TransferenciaRecebidaRepository transferenciaRecebidaRepository;
+    private TransferenciaEnviadaRepository transferenciaEnviadaRepository;
 
     @Transactional
     public void salvarConta(Cliente cliente) {
@@ -37,8 +37,8 @@ public class ContaService {
                 .conta(contaRepository.getById(cliente_id))
                 .depositos(depositoRepository.getByConta_Id(cliente_id))
                 .saques(saqueRepository.getByConta_Id(cliente_id))
-                .transferenciasEnviadas(transferenciaRepository.getByContaOrigemId(cliente_id))
-                .transferenciasRecebidas(transferenciaRepository.getByContaDestinoId(cliente_id))
+                .transferenciasEnviadas(transferenciaEnviadaRepository.getByContaOrigemId(cliente_id))
+                .transferenciasRecebidas(transferenciaRecebidaRepository.getByContaDestinoId(cliente_id))
                 .build();
     }
 
