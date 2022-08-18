@@ -8,8 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface ContaRepository extends JpaRepository<Conta, Long> {
-
     Optional<Conta> findById(Long id);
-
-    Conta getById(Long id);
 }

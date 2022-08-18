@@ -1,8 +1,8 @@
 package com.example.apibanco.api.model;
 
 import com.example.apibanco.domain.model.Conta;
-import com.example.apibanco.domain.model.transactions.Saque;
 import com.example.apibanco.domain.model.transactions.Deposito;
+import com.example.apibanco.domain.model.transactions.Saque;
 import lombok.*;
 
 import java.util.List;

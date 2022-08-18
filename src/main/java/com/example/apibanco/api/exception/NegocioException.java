@@ -15,6 +15,4 @@ public class NegocioException extends RuntimeException {
         this.titulo = titulo;
         this.camposInvalidos = camposInvalidos;
     }
-
-
 }

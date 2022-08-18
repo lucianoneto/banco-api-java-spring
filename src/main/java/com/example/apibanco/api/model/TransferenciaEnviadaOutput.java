@@ -9,7 +9,6 @@ import java.sql.Time;
 @Data
 public class TransferenciaEnviadaOutput {
 
-
     private Float valor;
 
     private Long idContaDestino;

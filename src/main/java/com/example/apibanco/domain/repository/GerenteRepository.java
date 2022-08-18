@@ -10,9 +10,7 @@ import java.util.Optional;
 public interface GerenteRepository extends JpaRepository<Gerente, Long> {
     Optional<Gerente> findById(Long id);
 
-    Gerente getById(Long id);
-
-    boolean existsByCpf(String CPF);
+    boolean existsByCpf(String cpf);
 
     boolean existsByEmail(String email);
 }

@@ -44,6 +44,4 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
                 .camposInvalidos(ex.getCamposInvalidos())
                 .build(), new HttpHeaders(), HttpStatus.BAD_REQUEST.value());
     }
-
-
 }

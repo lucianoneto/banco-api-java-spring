@@ -1,7 +1,6 @@
 package com.example.apibanco.domain.model.transactions;
 
 import com.example.apibanco.domain.model.Conta;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
@@ -20,7 +19,6 @@ import java.sql.Time;
 public class Transferencia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
     private Long id;
 
     @Column(name = "transferencia_valor")

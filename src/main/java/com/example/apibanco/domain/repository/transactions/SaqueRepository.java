@@ -8,8 +8,6 @@ import java.util.List;
 
 @Repository
 public interface SaqueRepository extends JpaRepository<Saque, Long> {
-    Saque getById(Long id);
-
     List<Saque> getByConta_Id(Long id);
 
 

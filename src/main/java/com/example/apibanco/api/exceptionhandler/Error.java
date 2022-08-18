@@ -12,6 +12,7 @@ import java.util.HashMap;
 @Setter
 @Builder
 public class Error {
+
     private Integer status;
     private LocalDateTime dataHora;
     private String titulo;
