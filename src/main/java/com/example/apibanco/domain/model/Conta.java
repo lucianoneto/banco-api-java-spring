@@ -29,7 +29,6 @@ public class Conta {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Time horaCriacao;
 
-    @JsonIgnore
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;

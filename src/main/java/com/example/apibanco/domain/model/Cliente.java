@@ -27,11 +27,13 @@ public class Cliente {
 
     private String tipoConta;
 
+    @JoinColumn(name = "cliente_ativo")
+    private Boolean ativo;
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "gerente_id")
     private Gerente gerente;
-
 }
 
 

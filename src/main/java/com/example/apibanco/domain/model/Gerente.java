@@ -1,5 +1,6 @@
 package com.example.apibanco.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.validator.constraints.br.CPF;
 
@@ -40,5 +41,9 @@ public class Gerente {
     @Size(max = 256)
     @Column(unique = true)
     private String email;
+
+    @JsonIgnore
+    @JoinColumn(name = "gerente_ativo")
+    private Boolean ativo;
 
 }

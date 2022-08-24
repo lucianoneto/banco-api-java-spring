@@ -18,37 +18,37 @@ import javax.validation.Valid;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/conta")
+@RequestMapping("/contas")
 public class ContaController {
     private ContaService contaService;
     private DepositoService depositoService;
     private SaqueService saqueService;
     private TransferenciaService transferenciaService;
-    @GetMapping("/extrato/{cliente_id}")
+    @GetMapping("/{conta_id}/extrato")
     @ResponseStatus(HttpStatus.OK)
-    public ExtratoInput extrato(@PathVariable Long cliente_id) {
-        return contaService.mostrarExtrato(cliente_id);
+    public ExtratoInput extrato(@PathVariable Long conta_id) {
+        return contaService.mostrarExtrato(conta_id);
     }
 
     @Transactional
-    @PostMapping("/deposito/{cliente_id}")
+    @PostMapping("/{conta_id}/depositos")
     @ResponseStatus(HttpStatus.OK)
-    public Deposito depositar(@Valid @PathVariable Long cliente_id, @RequestBody Deposito deposito) {
-        return depositoService.salvarDeposito(cliente_id, deposito.getValor());
+    public Deposito depositar(@Valid @PathVariable Long conta_id, @RequestBody Deposito deposito) {
+        return depositoService.salvarDeposito(conta_id, deposito.getValor());
     }
 
     @Transactional
-    @PostMapping("/saque/{cliente_id}")
+    @PostMapping("/{conta_id}/saques")
     @ResponseStatus(HttpStatus.OK)
-    public Saque sacar(@PathVariable Long cliente_id, @RequestBody Saque saque) {
-        return saqueService.salvarSaque(cliente_id, saque.getValor());
+    public Saque sacar(@PathVariable Long conta_id, @RequestBody Saque saque) {
+        return saqueService.salvarSaque(conta_id, saque.getValor());
     }
 
     @Transactional
-    @PostMapping("/transferencia/{clienteOrigem_id}")
+    @PostMapping("/{contaOrigem_id}/transferencias/{contaDestino_id}")
     @ResponseStatus(HttpStatus.OK)
-    public TransferenciaEnviadaOutput transferencia(@Valid @PathVariable Long clienteOrigem_id, @RequestBody Transferencia transferencia) {
-        return transferenciaService.salvarTransferencia(clienteOrigem_id, transferencia);
+    public TransferenciaEnviadaOutput transferencia(@Valid @PathVariable Long contaOrigem_id, @PathVariable Long contaDestino_id, @RequestBody Transferencia transferencia) {
+        return transferenciaService.salvarTransferencia(contaOrigem_id, contaDestino_id, transferencia.getValor());
     }
 
 }

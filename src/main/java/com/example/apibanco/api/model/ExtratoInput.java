@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ExtratoInput {
 
-    private Conta conta;
+    private ContaOutput conta;
 
     private List<Deposito> depositos;
 
