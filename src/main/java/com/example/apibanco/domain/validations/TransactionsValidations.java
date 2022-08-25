@@ -13,6 +13,7 @@ public class TransactionsValidations {
 
     private ContaRepository contaRepository;
     private ClienteValidations clienteValidations;
+
     public void verificaTransacao(HashMap<String, String> camposInvalidos, Float valor, Long conta_id) {
         clienteValidations.verificaContaClienteInativa(camposInvalidos,conta_id);
         if (valor < 1)

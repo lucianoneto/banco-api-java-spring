@@ -17,6 +17,7 @@ import java.sql.Time;
 @Entity
 @Builder
 public class Transferencia {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -17,6 +17,7 @@ import java.sql.Time;
 @Entity
 @Builder
 public class Deposito {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore

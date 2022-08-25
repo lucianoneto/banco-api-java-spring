@@ -17,6 +17,7 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class GerenteService {
+
     private GerenteRepository gerenteRepository;
     private GerenteValidations gerenteValidations;
     private ClienteRepository clienteRepository;

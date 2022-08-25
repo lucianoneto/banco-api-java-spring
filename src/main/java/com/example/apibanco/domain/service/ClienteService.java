@@ -21,6 +21,7 @@ import java.util.HashMap;
 @Service
 @AllArgsConstructor
 public class ClienteService {
+
     private ClienteRepository clienteRepository;
     private ContaService contaService;
     private GerenteRepository gerenteRepository;
@@ -51,6 +52,7 @@ public class ClienteService {
     }
 
     public Cliente inativarCliente(Long gerente_id, Long cliente_id){
+
         HashMap<String, String> camposInvalidos = new HashMap<>();
 
         clienteValidations.verificaContaClienteInativa(camposInvalidos, cliente_id);

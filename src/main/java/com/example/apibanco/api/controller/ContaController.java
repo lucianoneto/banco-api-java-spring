@@ -20,10 +20,12 @@ import javax.validation.Valid;
 @AllArgsConstructor
 @RequestMapping("/contas")
 public class ContaController {
+
     private ContaService contaService;
     private DepositoService depositoService;
     private SaqueService saqueService;
     private TransferenciaService transferenciaService;
+
     @GetMapping("/{conta_id}/extrato")
     @ResponseStatus(HttpStatus.OK)
     public ExtratoInput extrato(@PathVariable Long conta_id) {
