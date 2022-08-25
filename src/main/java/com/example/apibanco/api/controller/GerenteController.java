@@ -19,6 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping("/gerentes")
 public class GerenteController {
+
     private GerenteService gerenteService;
     private ClienteService clienteService;
     private ContaService contaService;
@@ -41,7 +42,6 @@ public class GerenteController {
     public List<Conta> listarCliente() {
         return contaService.mostrarTodasContas();
     }
-
 
     @Transactional
     @PostMapping("/{gerente_id}/addCliente")

@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 public class ContaService {
+
     private ContaRepository contaRepository;
     private DepositoRepository depositoRepository;
     private SaqueRepository saqueRepository;
@@ -47,9 +48,13 @@ public class ContaService {
 
     public ExtratoInput mostrarExtrato(Long conta_id) {
         HashMap<String, String> camposInvalidos = new HashMap<>();
+
         clienteValidations.verificaContaClienteInativa(camposInvalidos, conta_id);
+
+        Conta conta = contaRepository.getReferenceById(conta_id);
+
         return ExtratoInput.builder()
-                .conta(modelMapper.map(contaRepository.getReferenceById(conta_id), ContaOutput.class))
+                .conta(modelMapper.map(conta, ContaOutput.class))
                 .depositos(depositoRepository.getByConta_Id(conta_id))
                 .saques(saqueRepository.getByConta_Id(conta_id))
                 .transferenciasEnviadas(transferenciaRepository.getByContaOrigemId(conta_id)

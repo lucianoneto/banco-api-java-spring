@@ -12,6 +12,7 @@ import java.util.HashMap;
 public class ClienteValidations {
 
     private ContaRepository contaRepository;
+
     public void verificaContaClienteInativa(HashMap<String, String> camposInvalidos, Long conta_id){
         verificaContaClienteExistente(camposInvalidos, conta_id);
         if(!contaRepository.getReferenceById(conta_id).getCliente().getAtivo())

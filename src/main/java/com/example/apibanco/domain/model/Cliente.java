@@ -25,8 +25,6 @@ public class Cliente {
 
     private String email;
 
-    private String tipoConta;
-
     @JoinColumn(name = "cliente_ativo")
     private Boolean ativo;
 

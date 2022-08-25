@@ -17,6 +17,7 @@ import java.sql.Time;
 @Builder
 @Entity
 public class Saque {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore
