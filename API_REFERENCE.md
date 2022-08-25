@@ -38,7 +38,7 @@
 
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `gerente_id`      | `Long` | **Obrigatório**. ID do gerente. |
+| `gerente_id`      | `long` | **Obrigatório**. ID do gerente. |
 
 
 #### Respostas
@@ -67,7 +67,7 @@
 
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `gerente_id`      | `Long` | **Obrigatório**. ID do gerente. |
+| `gerente_id`      | `long` | **Obrigatório**. ID do gerente. |
 
 #### Requisição
 
@@ -97,8 +97,8 @@
 
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `gerente_id`      | `Long` | **Obrigatório**. ID do gerente. |
-| `cliente_id`      | `Long` | **Obrigatório**. ID do cliente. |
+| `gerente_id`      | `long` | **Obrigatório**. ID do gerente. |
+| `cliente_id`      | `long` | **Obrigatório**. ID do cliente. |
 
 #### Respostas
 
@@ -114,8 +114,8 @@
 ```
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `gerente_id`      | `Long` | **Obrigatório**. ID do gerente. |
-| `cliente_id`      | `Long` | **Obrigatório**. ID do cliente. |
+| `gerente_id`      | `long` | **Obrigatório**. ID do gerente. |
+| `cliente_id`      | `long` | **Obrigatório**. ID do cliente. |
 
 #### Respostas
 
@@ -131,8 +131,8 @@
 ```
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `gerente_id`      | `Long` | **Obrigatório**. ID do atual gerente. |
-| `novoGerente_id`      | `Long` | **Obrigatório**. ID do novo gerente. |
+| `gerente_id`      | `long` | **Obrigatório**. ID do atual gerente. |
+| `novoGerente_id`      | `long` | **Obrigatório**. ID do novo gerente. |
 
 #### Respostas
 
@@ -148,7 +148,7 @@
 ```
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `gerente_id`      | `Long` | **Obrigatório**. ID do atual gerente. |
+| `gerente_id`      | `long` | **Obrigatório**. ID do atual gerente. |
 
 #### Respostas
 
@@ -166,7 +166,7 @@
 ```
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `conta_id`      | `Long` | **Obrigatório**. ID da conta. |
+| `conta_id`      | `long` | **Obrigatório**. ID da conta. |
 
 #### Respostas
 
@@ -183,7 +183,7 @@
 
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `conta_id`      | `Long` | **Obrigatório**. ID da conta. |
+| `conta_id`      | `long` | **Obrigatório**. ID da conta. |
 
 #### Requisição
 
@@ -208,7 +208,7 @@
 
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `conta_id`      | `Long` | **Obrigatório**. ID da conta. |
+| `conta_id`      | `long` | **Obrigatório**. ID da conta. |
 
 #### Requisição
 
@@ -233,8 +233,8 @@
 
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `contaOrigem_id`      | `Long` | **Obrigatório**. ID da conta de origem. |
-| `contaDestino_id`      | `Long` | **Obrigatório**. ID da conta de destino. |
+| `contaOrigem_id`      | `long` | **Obrigatório**. ID da conta de origem. |
+| `contaDestino_id`      | `long` | **Obrigatório**. ID da conta de destino. |
 
 #### Requisição
 
