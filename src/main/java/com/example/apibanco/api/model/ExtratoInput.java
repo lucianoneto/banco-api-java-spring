@@ -1,8 +1,7 @@
 package com.example.apibanco.api.model;
 
-import com.example.apibanco.domain.model.Conta;
-import com.example.apibanco.domain.model.transactions.Deposito;
-import com.example.apibanco.domain.model.transactions.Saque;
+import com.example.apibanco.domain.model.transactions.Deposit;
+import com.example.apibanco.domain.model.transactions.Withdraw;
 import lombok.*;
 
 import java.util.List;
@@ -14,15 +13,15 @@ import java.util.List;
 @NoArgsConstructor
 public class ExtratoInput {
 
-    private ContaOutput conta;
+    private AccountOutput account;
 
-    private List<Deposito> depositos;
+    private List<Deposit> deposits;
 
-    private List<Saque> saques;
+    private List<Withdraw> withdraws;
 
-    private List<TransferenciaEnviadaOutput> transferenciasEnviadas;
+    private List<TransferSentOutput> transferSentOutputs;
 
-    private List<TransferenciaRecebidaOutput> transferenciasRecebidas;
+    private List<TransferReceivedOutput> transferReceivedOutputs;
 
 
 }

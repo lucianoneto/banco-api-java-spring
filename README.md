@@ -7,7 +7,7 @@ do front-end, APIs para requisições, segurança e etc.
 
 Com o passar do tempo e com minha nova perspectiva a respeito do mundo da programação,
 tive a ideia de desenvolver uma API com as mesmas funcionalidades do banco feito
-em puro Java, ou seja, um projeto em que ocorre o controle da aplicação por meio do gerente
+em puro Java, ou seja, um projeto em que ocorre o controle da aplicação por meio do manager
 e o mesmo é capaz de gerenciar e registrar clientes, podendo inativá-los e também voltarem a ativa.
 Estes clientes são livres para organizar sua vida financeira através de funções de saque, depósito, 
 transferências e checagem de extrato.

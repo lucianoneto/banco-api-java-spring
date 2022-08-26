@@ -1,42 +1,45 @@
 package com.example.apibanco.domain.validations;
 
-import com.example.apibanco.api.exception.NegocioException;
-import com.example.apibanco.domain.repository.ContaRepository;
+import com.example.apibanco.api.exception.BusinessException;
+import com.example.apibanco.domain.repository.AccountRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.Locale;
 
 @Component
 @AllArgsConstructor
 public class TransactionsValidations {
 
-    private ContaRepository contaRepository;
-    private ContaValidations contaValidations;
+    private AccountRepository accountRepository;
+    private AccountValidations accountValidations;
+    private final MessageSource messageSource;
 
-    public void verificaTransacao(HashMap<String, String> camposInvalidos, Float valor, Long conta_id) {
-        contaValidations.verificaContaClienteInativa(camposInvalidos,conta_id);
+    public void checkTransaction(HashMap<String, String> camposInvalidos, Float valor, Long conta_id) {
+        accountValidations.checkInactiveClientAccount(camposInvalidos,conta_id);
         if (valor < 1)
-            camposInvalidos.put("valor", "Invalid amount.");
+            camposInvalidos.put("valor", messageSource.getMessage("valor.invalid", null, Locale.US));
         if (!camposInvalidos.isEmpty())
-            throw new NegocioException("One or more fields are invalid.", camposInvalidos);
+            throw new BusinessException(messageSource.getMessage("general.error", null, Locale.US), camposInvalidos);
     }
 
-    public void verificaSaque(HashMap<String, String> camposInvalidos, Float valor, Long conta_id) {
-        verificaTransacao(camposInvalidos, valor, conta_id);
-        if (contaRepository.getReferenceById(conta_id).getSaldo() < valor)
-            camposInvalidos.put("valorSaque", "Invalid value of bank draft.");
+    public void checkWithdraw(HashMap<String, String> camposInvalidos, Float valor, Long conta_id) {
+        checkTransaction(camposInvalidos, valor, conta_id);
+        if (accountRepository.getReferenceById(conta_id).getBalance() < valor)
+            camposInvalidos.put("valorSaque", messageSource.getMessage("valor.enough", null, Locale.US));
         if (!camposInvalidos.isEmpty())
-            throw new NegocioException("One or more fields are invalid.", camposInvalidos);
+            throw new BusinessException(messageSource.getMessage("general.error", null, Locale.US), camposInvalidos);
     }
 
-    public void verificaTransferencia(HashMap<String, String> camposInvalidos, Float valor, Long contaOrigem_id, Long contaDestino_id) {
-        verificaTransacao(camposInvalidos, valor, contaOrigem_id);
-        contaValidations.verificaContaClienteInativa(camposInvalidos, contaDestino_id);
-        if (contaRepository.getReferenceById(contaOrigem_id).getSaldo() < valor)
-            camposInvalidos.put("valorTransferencia", "Invalid value of bank draft.");
+    public void checkTransfer(HashMap<String, String> camposInvalidos, Float valor, Long contaOrigem_id, Long contaDestino_id) {
+        checkTransaction(camposInvalidos, valor, contaOrigem_id);
+        accountValidations.checkInactiveClientAccount(camposInvalidos, contaDestino_id);
+        if (accountRepository.getReferenceById(contaOrigem_id).getBalance() < valor)
+            camposInvalidos.put("valorTransferencia", messageSource.getMessage("valor.enough", null, Locale.US));
         if (!camposInvalidos.isEmpty())
-            throw new NegocioException("One or more fields are invalid.", camposInvalidos);
+            throw new BusinessException(messageSource.getMessage("general.error", null, Locale.US), camposInvalidos);
     }
 
 }

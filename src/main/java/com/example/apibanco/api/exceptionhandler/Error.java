@@ -14,8 +14,8 @@ import java.util.HashMap;
 public class Error {
 
     private Integer status;
-    private LocalDateTime dataHora;
-    private String titulo;
-    private HashMap<String, String> camposInvalidos;
+    private LocalDateTime dateTime;
+    private String title;
+    private HashMap<String, String> invalidCamps;
 
 }

@@ -1,9 +1,9 @@
 package com.example.apibanco.domain.service.transactions;
 
-import com.example.apibanco.api.model.TransferenciaEnviadaOutput;
-import com.example.apibanco.domain.model.Conta;
-import com.example.apibanco.domain.model.transactions.Transferencia;
-import com.example.apibanco.domain.repository.ContaRepository;
+import com.example.apibanco.api.model.TransferSentOutput;
+import com.example.apibanco.domain.model.Account;
+import com.example.apibanco.domain.model.transactions.Transfer;
+import com.example.apibanco.domain.repository.AccountRepository;
 import com.example.apibanco.domain.repository.transactions.TransferenciaRepository;
 import com.example.apibanco.domain.utils.Utils;
 import com.example.apibanco.domain.validations.TransactionsValidations;
@@ -19,37 +19,37 @@ import java.util.HashMap;
 @AllArgsConstructor
 public class TransferenciaService {
 
-    private ContaRepository contaRepository;
+    private AccountRepository accountRepository;
     private TransferenciaRepository transferenciaRepository;
     private TransactionsValidations transactionsValidations;
     private ModelMapper modelMapper;
 
     @Transactional
-    public TransferenciaEnviadaOutput salvarTransferencia(Long idContaOrigem, Long idContaDestino, Float valor) {
+    public TransferSentOutput saveTransfer(Long idContaOrigem, Long idContaDestino, Float valor) {
         HashMap<String, String> camposInvalidos = new HashMap<>();
 
-        transactionsValidations.verificaTransferencia(camposInvalidos, valor, idContaOrigem, idContaDestino);
+        transactionsValidations.checkTransfer(camposInvalidos, valor, idContaOrigem, idContaDestino);
 
-        Conta contaOrigem = contaRepository.getReferenceById(idContaOrigem);
-        Conta contaDestino = contaRepository.getReferenceById(idContaDestino);
+        Account accountOrigem = accountRepository.getReferenceById(idContaOrigem);
+        Account accountDestino = accountRepository.getReferenceById(idContaDestino);
 
-        Transferencia transferencia = Transferencia.builder()
-                .valor(valor)
-                .data(Utils.dateNow())
-                .horario(Utils.timeNow())
-                .contaDestino(contaDestino)
-                .contaOrigem(contaOrigem)
+        Transfer transfer = Transfer.builder()
+                .value(valor)
+                .date(Utils.dateNow())
+                .time(Utils.timeNow())
+                .destinyAccount(accountDestino)
+                .originAccount(accountOrigem)
                 .build();
 
-        contaOrigem.setSaldo(contaOrigem.getSaldo() - transferencia.getValor());
-        contaRepository.save(contaOrigem);
+        accountOrigem.setBalance(accountOrigem.getBalance() - transfer.getValue());
+        accountRepository.save(accountOrigem);
 
-        contaDestino.setSaldo(contaDestino.getSaldo() + transferencia.getValor());
-        contaRepository.save(contaDestino);
+        accountDestino.setBalance(accountDestino.getBalance() + transfer.getValue());
+        accountRepository.save(accountDestino);
 
-        transferenciaRepository.save(transferencia);
+        transferenciaRepository.save(transfer);
 
-        return modelMapper.map(transferencia, TransferenciaEnviadaOutput.class);
+        return modelMapper.map(transfer, TransferSentOutput.class);
 
     }
 }

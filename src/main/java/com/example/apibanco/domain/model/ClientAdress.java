@@ -1,6 +1,5 @@
 package com.example.apibanco.domain.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +14,7 @@ import javax.validation.constraints.Size;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClienteEndereco {
+public class ClientAdress {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,15 +22,15 @@ public class ClienteEndereco {
 
     @NotBlank
     @Size(max = 70)
-    private String logradouro;
+    private String street;
 
     @NotBlank
     @Size(max = 40)
-    private String setor;
+    private String district;
 
     @NotBlank
     @Size(max = 8)
-    private String numero;
+    private String number;
 
     @NotBlank
     @Size(max = 8, min = 8)

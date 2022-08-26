@@ -5,7 +5,7 @@
 
 ### Criar Gerentes
 
-##### Cria um novo gerente.
+##### Cria um novo manager.
 
 ```http
   POST /gerentes
@@ -16,10 +16,10 @@
 
 | Parâmetro   | Tipo       | Descrição                           |
 | :---------- | :--------- | :---------------------------------- |
-| `nome` | `string` | **Obrigatório**. Nome do novo gerente. |
-| `cpf` | `string` | **Obrigatório**. CPF do novo gerente. |
-| `email` | `string` | **Obrigatório**. E-mail do novo gerente. |
-| `telefone` | `string` | **Obrigatório**. Telefone do novo gerente. |
+| `nome` | `string` | **Obrigatório**. Nome do novo manager. |
+| `cpf` | `string` | **Obrigatório**. CPF do novo manager. |
+| `email` | `string` | **Obrigatório**. E-mail do novo manager. |
+| `telefone` | `string` | **Obrigatório**. Telefone do novo manager. |
 
 
 #### Respostas
@@ -30,7 +30,7 @@
 
 ### Listar Clientes por Gerentes
 
-##### Lista todos os clientes registrados por um gerente específico.
+##### Lista todos os clientes registrados por um manager específico.
 
 ```http
   GET /{gerente_id}/clientes
@@ -38,7 +38,7 @@
 
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `gerente_id`      | `long` | **Obrigatório**. ID do gerente. |
+| `gerente_id`      | `long` | **Obrigatório**. ID do manager. |
 
 
 #### Respostas
@@ -59,7 +59,7 @@
 
 ### Criar Clientes
 
-##### Cria um novo cliente.
+##### Cria um novo client.
 
 ```http
   POST /gerentes/{gerente_id}/addCliente
@@ -67,7 +67,7 @@
 
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `gerente_id`      | `long` | **Obrigatório**. ID do gerente. |
+| `gerente_id`      | `long` | **Obrigatório**. ID do manager. |
 
 #### Requisição
 
@@ -75,11 +75,11 @@
 
 | Parâmetro   | Tipo       | Descrição                           |
 | :---------- | :--------- | :---------------------------------- |
-| `nome` | `string` | **Obrigatório**. Nome do novo cliente. |
-| `cpf` | `string` | **Obrigatório**. CPF do novo cliente. |
-| `email` | `string` | **Obrigatório**. E-mail do novo cliente. |
-| `telefone` | `string` | **Obrigatório**. Telefone do novo cliente. |
-| `endereco` | `endereco` | **Obrigatório**. Endereço do novo cliente (tipo especificado no final da Documentação). |
+| `nome` | `string` | **Obrigatório**. Nome do novo client. |
+| `cpf` | `string` | **Obrigatório**. CPF do novo client. |
+| `email` | `string` | **Obrigatório**. E-mail do novo client. |
+| `telefone` | `string` | **Obrigatório**. Telefone do novo client. |
+| `endereco` | `endereco` | **Obrigatório**. Endereço do novo client (tipo especificado no final da Documentação). |
 
 
 #### Respostas
@@ -89,7 +89,7 @@
 
 ### Inativar Clientes
 
-##### Inativa um cliente existente.
+##### Inativa um client existente.
 
 ```http
   PATCH /gerentes/{gerente_id}/inativarCliente/{cliente_id}
@@ -97,8 +97,8 @@
 
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `gerente_id`      | `long` | **Obrigatório**. ID do gerente. |
-| `cliente_id`      | `long` | **Obrigatório**. ID do cliente. |
+| `gerente_id`      | `long` | **Obrigatório**. ID do manager. |
+| `cliente_id`      | `long` | **Obrigatório**. ID do client. |
 
 #### Respostas
 
@@ -107,15 +107,15 @@
 
 ### Ativar Clientes
 
-##### Ativa um cliente existente inativado.
+##### Ativa um client existente inativado.
 
 ```http
   PATCH /gerentes/{gerente_id}/ativarCliente/{cliente_id}
 ```
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `gerente_id`      | `long` | **Obrigatório**. ID do gerente. |
-| `cliente_id`      | `long` | **Obrigatório**. ID do cliente. |
+| `gerente_id`      | `long` | **Obrigatório**. ID do manager. |
+| `cliente_id`      | `long` | **Obrigatório**. ID do client. |
 
 #### Respostas
 
@@ -124,15 +124,15 @@
 
 ### Inativar Gerentes
 
-##### Inativa um gerente existente, onde os clientes do mesmo são transferidos para outro gerente ativo existente.
+##### Inativa um manager existente, onde os clientes do mesmo são transferidos para outro manager ativo existente.
 
 ```http
   PATCH /gerentes/{gerente_id}/inativar/{novoGerente_id}
 ```
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `gerente_id`      | `long` | **Obrigatório**. ID do atual gerente. |
-| `novoGerente_id`      | `long` | **Obrigatório**. ID do novo gerente. |
+| `gerente_id`      | `long` | **Obrigatório**. ID do atual manager. |
+| `novoGerente_id`      | `long` | **Obrigatório**. ID do novo manager. |
 
 #### Respostas
 
@@ -141,14 +141,14 @@
 
 ### Ativar Gerentes
 
-##### Ativa um gerente existente inativado.
+##### Ativa um manager existente inativado.
 
 ```http
   PATCH /gerentes/{gerente_id}/ativar
 ```
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `gerente_id`      | `long` | **Obrigatório**. ID do atual gerente. |
+| `gerente_id`      | `long` | **Obrigatório**. ID do atual manager. |
 
 #### Respostas
 
@@ -159,14 +159,14 @@
 
 ### Listar Extratos
 
-##### Lista todas as transações efetuadas na conta do cliente.
+##### Lista todas as transações efetuadas na account do client.
 
 ```http
   GET /contas/{conta_id}/extrato
 ```
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `conta_id`      | `long` | **Obrigatório**. ID da conta. |
+| `conta_id`      | `long` | **Obrigatório**. ID da account. |
 
 #### Respostas
 
@@ -175,7 +175,7 @@
 
 ## Realizar Depósitos
 
-##### Realiza Depósitos em uma conta.
+##### Realiza Depósitos em uma account.
 
 ```http
   POST /contas/{conta_id}/depositos
@@ -183,7 +183,7 @@
 
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `conta_id`      | `long` | **Obrigatório**. ID da conta. |
+| `conta_id`      | `long` | **Obrigatório**. ID da account. |
 
 #### Requisição
 
@@ -200,7 +200,7 @@
 
 ## Realizar Saques
 
-##### Realiza saques em uma conta.
+##### Realiza saques em uma account.
 
 ```http
   POST /contas/{conta_id}/saques
@@ -208,7 +208,7 @@
 
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `conta_id`      | `long` | **Obrigatório**. ID da conta. |
+| `conta_id`      | `long` | **Obrigatório**. ID da account. |
 
 #### Requisição
 
@@ -225,7 +225,7 @@
 
 ## Realizar Transferências
 
-##### Realiza transferências de uma conta para outra.
+##### Realiza transferências de uma account para outra.
 
 ```http
   POST /contas/{contaOrigem_id}/transferencias/{contaDestino_id}
@@ -233,8 +233,8 @@
 
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `contaOrigem_id`      | `long` | **Obrigatório**. ID da conta de origem. |
-| `contaDestino_id`      | `long` | **Obrigatório**. ID da conta de destino. |
+| `contaOrigem_id`      | `long` | **Obrigatório**. ID da account de origem. |
+| `contaDestino_id`      | `long` | **Obrigatório**. ID da account de destino. |
 
 #### Requisição
 
@@ -256,10 +256,10 @@
 
 | Parâmetro   | Tipo       | Descrição                           |
 | :---------- | :--------- | :---------------------------------- |
-| `cep` | `string` | **Obrigatório**. CEP do novo cliente. |
-| `logradouro` | `string` | **Obrigatório**. Logradouro do novo cliente. |
-| `numero` | `string` | **Obrigatório**. Numero do endereço do novo cliente. |
-| `setor` | `string` | **Obrigatório**. Setor do endereço do novo cliente. |
+| `cep` | `string` | **Obrigatório**. CEP do novo client. |
+| `logradouro` | `string` | **Obrigatório**. Logradouro do novo client. |
+| `numero` | `string` | **Obrigatório**. Numero do endereço do novo client. |
+| `setor` | `string` | **Obrigatório**. Setor do endereço do novo client. |
 
 -------------------
 ## Respostas Padrão

@@ -11,31 +11,31 @@ import javax.persistence.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cliente {
+public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nome;
+    private String name;
 
     private String cpf;
 
-    private String telefone;
+    private String phone;
 
     private String email;
 
-    @JoinColumn(name = "cliente_ativo")
-    private Boolean ativo;
+    @JoinColumn(name = "client_ative")
+    private Boolean active;
 
     @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "cliente_endereco_id")
-    private ClienteEndereco endereco;
+    @JoinColumn(name = "client_adress_id")
+    private ClientAdress adress;
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "gerente_id")
-    private Gerente gerente;
+    @JoinColumn(name = "manager_id")
+    private Manager manager;
 }
 
 

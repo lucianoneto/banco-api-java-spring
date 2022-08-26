@@ -1,15 +1,15 @@
 package com.example.apibanco.domain.repository.transactions;
 
-import com.example.apibanco.domain.model.transactions.Transferencia;
+import com.example.apibanco.domain.model.transactions.Transfer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface TransferenciaRepository extends JpaRepository<Transferencia, Long> {
+public interface TransferenciaRepository extends JpaRepository<Transfer, Long> {
 
-    List<Transferencia> getByContaOrigemId(Long id);
+    List<Transfer> getByOriginAccountId(Long id);
 
-    List<Transferencia> getByContaDestinoId(Long id);
+    List<Transfer> getByDestinyAccountId(Long id);
 }

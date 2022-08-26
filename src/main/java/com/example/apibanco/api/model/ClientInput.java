@@ -1,30 +1,25 @@
-package com.example.apibanco.domain.model;
+package com.example.apibanco.api.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
+import com.example.apibanco.domain.model.ClientAdress;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.validator.constraints.br.CPF;
 
-import javax.persistence.*;
+import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
 
 @Getter
 @Setter
-@Entity
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class Gerente {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class ClientInput {
 
     @NotBlank
     @Size(max = 70)
-    private String nome;
+    private String name;
 
     @NotBlank
     @Size(max = 11, min = 11)
@@ -34,16 +29,14 @@ public class Gerente {
 
     @NotBlank
     @Size(max = 20)
-    private String telefone;
+    private String phone;
 
     @Email
     @NotBlank
-    @Size(max = 256)
+    @Size(max = 255)
     @Column(unique = true)
     private String email;
 
-    @JsonIgnore
-    @JoinColumn(name = "gerente_ativo")
-    private Boolean ativo;
-
+    @NotNull
+    private ClientAdress adress;
 }

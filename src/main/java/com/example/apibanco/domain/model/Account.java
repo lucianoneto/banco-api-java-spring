@@ -1,6 +1,5 @@
 package com.example.apibanco.domain.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
@@ -14,23 +13,23 @@ import java.sql.Time;
 @NoArgsConstructor
 @Entity
 @Builder
-public class Conta {
+public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private Float saldo;
+    private Float balance;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private Date dataCriacao;
+    private Date creationData;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private Time horaCriacao;
+    private Time creationTime;
 
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "cliente_id", nullable = false)
-    private Cliente cliente;
+    private Client client;
 
 }

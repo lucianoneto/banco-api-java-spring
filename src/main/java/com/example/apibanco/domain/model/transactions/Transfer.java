@@ -1,7 +1,6 @@
 package com.example.apibanco.domain.model.transactions;
 
-import com.example.apibanco.domain.model.Conta;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.example.apibanco.domain.model.Account;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
@@ -10,34 +9,36 @@ import javax.validation.constraints.Min;
 import java.sql.Date;
 import java.sql.Time;
 
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Builder
-public class Deposito {
+public class Transfer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
     private Long id;
 
-    @Column(name = "deposito_valor")
+    @Column(name = "transfer_value")
     @Min(1)
-    private Float valor;
+    private Float value;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @Column(name = "deposito_horario")
-    private Time horario;
+    @Column(name = "transfer_time")
+    private Time time;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @Column(name = "deposito_data")
-    private Date data;
+    @Column(name = "transfer_date")
+    private Date date;
 
-    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "conta_id")
-    private Conta conta;
+    @JoinColumn(name = "origin_account_id")
+    private Account originAccount;
 
+    @ManyToOne
+    @JoinColumn(name = "destiny_account_id")
+    private Account destinyAccount;
 }

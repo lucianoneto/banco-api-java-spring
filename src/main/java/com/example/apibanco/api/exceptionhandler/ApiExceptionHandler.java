@@ -1,6 +1,6 @@
 package com.example.apibanco.api.exceptionhandler;
 
-import com.example.apibanco.api.exception.NegocioException;
+import com.example.apibanco.api.exception.BusinessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,28 +20,28 @@ import java.util.HashMap;
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        HashMap<String, String> campos = new HashMap<>();
+        HashMap<String, String> invalidCamps = new HashMap<>();
         for (ObjectError problem : ex.getBindingResult().getAllErrors()) {
-            String nome = ((FieldError) problem).getField();
-            String mensagem = problem.getDefaultMessage();
-            campos.put(nome, mensagem);
+            String name = ((FieldError) problem).getField();
+            String message = problem.getDefaultMessage();
+            invalidCamps.put(name, message);
         }
         return handleExceptionInternal(ex, Error.builder()
                         .status(status.value())
-                        .dataHora(LocalDateTime.now())
-                        .titulo("One or more fields are invalid. Please fill in correctly and try again.")
-                        .camposInvalidos(campos)
+                        .dateTime(LocalDateTime.now())
+                        .title("One or more fields are invalid. Please fill in correctly and try again.")
+                        .invalidCamps(invalidCamps)
                         .build()
                 , headers, status, request);
     }
 
-    @ExceptionHandler({NegocioException.class})
-    protected ResponseEntity<Object> handleNegocioViolation(NegocioException ex) {
+    @ExceptionHandler({BusinessException.class})
+    protected ResponseEntity<Object> handleNegocioViolation(BusinessException ex) {
         return new ResponseEntity<Object>(Error.builder()
                 .status(HttpStatus.BAD_REQUEST.value())
-                .titulo(ex.getTitulo())
-                .dataHora(LocalDateTime.now())
-                .camposInvalidos(ex.getCamposInvalidos())
+                .title(ex.getTitle())
+                .dateTime(LocalDateTime.now())
+                .invalidCamps(ex.getInvalidCamps())
                 .build(), new HttpHeaders(), HttpStatus.BAD_REQUEST.value());
     }
 }

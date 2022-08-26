@@ -1,6 +1,6 @@
 package com.example.apibanco.domain.repository;
 
-import com.example.apibanco.domain.model.Cliente;
+import com.example.apibanco.domain.model.Client;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ClienteRepository extends JpaRepository<Cliente, Long> {
+public interface ClientRepository extends JpaRepository<Client, Long> {
 
-    Optional<Cliente> findById(Long id);
+    Optional<Client> findById(Long id);
     boolean existsByCpf(String cpf);
     boolean existsByEmail(String email);
-    List<Cliente> findClientesByGerente_Id(Long gerente_id);
+    List<Client> findClientsByManager_Id(Long gerente_id);
 
 }

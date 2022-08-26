@@ -1,6 +1,6 @@
 package com.example.apibanco.api.model;
 
-import com.example.apibanco.domain.model.ClienteEndereco;
+import com.example.apibanco.domain.model.ClientAdress;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,14 +11,14 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 @Builder
-public class ClientePatchInput {
+public class ClientPatchInput {
 
     @Size(min = 11, max = 20)
-    private String telefone;
+    private String phone;
 
     @Email
     @Size(max = 255)
     private String email;
 
-    private ClienteEndereco endereco;
+    private ClientAdress adress;
 }
