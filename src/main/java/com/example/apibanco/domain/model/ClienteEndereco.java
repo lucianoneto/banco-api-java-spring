@@ -37,10 +37,5 @@ public class ClienteEndereco {
     @Size(max = 8, min = 8)
     private String CEP;
 
-    @JsonIgnore
-    @OneToOne
-    @JoinColumn(name = "cliente_id")
-    private Cliente cliente;
-
 
 }

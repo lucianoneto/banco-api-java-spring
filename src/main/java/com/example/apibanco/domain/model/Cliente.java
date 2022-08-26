@@ -28,6 +28,10 @@ public class Cliente {
     @JoinColumn(name = "cliente_ativo")
     private Boolean ativo;
 
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "cliente_endereco_id")
+    private ClienteEndereco endereco;
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "gerente_id")

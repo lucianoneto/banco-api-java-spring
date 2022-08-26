@@ -7,7 +7,6 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.Column;
-import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -34,11 +33,10 @@ public class ClienteInput {
 
     @Email
     @NotBlank
-    @Size(max = 256)
+    @Size(max = 255)
     @Column(unique = true)
     private String email;
 
-    @Valid
     @NotNull
     private ClienteEndereco endereco;
 }

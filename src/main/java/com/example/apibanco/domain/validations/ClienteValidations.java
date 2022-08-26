@@ -1,7 +1,7 @@
 package com.example.apibanco.domain.validations;
 
 import com.example.apibanco.api.exception.NegocioException;
-import com.example.apibanco.domain.repository.ContaRepository;
+import com.example.apibanco.domain.repository.ClienteRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -10,28 +10,24 @@ import java.util.HashMap;
 @Component
 @AllArgsConstructor
 public class ClienteValidations {
+    ClienteRepository clienteRepository;
+    GerenteValidations gerenteValidations;
+    public void verificaCamposInvalidos(HashMap<String, String> camposInvalidos, Long gerente_id, String cpf, String email) {
+        gerenteValidations.verificaGerenteExiste(camposInvalidos, gerente_id);
 
-    private ContaRepository contaRepository;
-
-    public void verificaContaClienteInativa(HashMap<String, String> camposInvalidos, Long conta_id){
-        verificaContaClienteExistente(camposInvalidos, conta_id);
-        if(!contaRepository.getReferenceById(conta_id).getCliente().getAtivo())
-            camposInvalidos.put("/idConta", "Conta is inactive");
+        if (clienteRepository.existsByCpf(cpf))
+            camposInvalidos.put("cpf", "CPF already registered in the database.");
+        if (clienteRepository.existsByEmail(email))
+            camposInvalidos.put("e-mail", "E-mail already registered in the database.");
         if (!camposInvalidos.isEmpty())
             throw new NegocioException("One or more fields are invalid.", camposInvalidos);
     }
 
-    public void verificaContaClienteAtiva(HashMap<String, String> camposInvalidos, Long conta_id){
-        verificaContaClienteExistente(camposInvalidos, conta_id);
-        if(contaRepository.getReferenceById(conta_id).getCliente().getAtivo())
-            camposInvalidos.put("/idConta", "Conta is active");
-        if (!camposInvalidos.isEmpty())
-            throw new NegocioException("One or more fields are invalid.", camposInvalidos);
-    }
+    public void verificaCamposInvalidos(HashMap<String, String> camposInvalidos, Long gerente_id, String email) {
+        gerenteValidations.verificaGerenteExiste(camposInvalidos, gerente_id);
 
-    private void verificaContaClienteExistente(HashMap<String, String> camposInvalidos, Long conta_id){
-        if (contaRepository.findById(conta_id).isEmpty())
-            camposInvalidos.put("/idConta", "Conta does not exist in the database");
+        if (clienteRepository.existsByEmail(email))
+            camposInvalidos.put("e-mail", "E-mail already registered in the database.");
         if (!camposInvalidos.isEmpty())
             throw new NegocioException("One or more fields are invalid.", camposInvalidos);
     }

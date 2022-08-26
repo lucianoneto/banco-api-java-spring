@@ -12,10 +12,10 @@ import java.util.HashMap;
 public class TransactionsValidations {
 
     private ContaRepository contaRepository;
-    private ClienteValidations clienteValidations;
+    private ContaValidations contaValidations;
 
     public void verificaTransacao(HashMap<String, String> camposInvalidos, Float valor, Long conta_id) {
-        clienteValidations.verificaContaClienteInativa(camposInvalidos,conta_id);
+        contaValidations.verificaContaClienteInativa(camposInvalidos,conta_id);
         if (valor < 1)
             camposInvalidos.put("valor", "Invalid amount.");
         if (!camposInvalidos.isEmpty())
@@ -32,7 +32,7 @@ public class TransactionsValidations {
 
     public void verificaTransferencia(HashMap<String, String> camposInvalidos, Float valor, Long contaOrigem_id, Long contaDestino_id) {
         verificaTransacao(camposInvalidos, valor, contaOrigem_id);
-        clienteValidations.verificaContaClienteInativa(camposInvalidos, contaDestino_id);
+        contaValidations.verificaContaClienteInativa(camposInvalidos, contaDestino_id);
         if (contaRepository.getReferenceById(contaOrigem_id).getSaldo() < valor)
             camposInvalidos.put("valorTransferencia", "Invalid value of bank draft.");
         if (!camposInvalidos.isEmpty())

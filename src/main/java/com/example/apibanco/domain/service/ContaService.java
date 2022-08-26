@@ -13,7 +13,7 @@ import com.example.apibanco.domain.repository.transactions.DepositoRepository;
 import com.example.apibanco.domain.repository.transactions.SaqueRepository;
 import com.example.apibanco.domain.repository.transactions.TransferenciaRepository;
 import com.example.apibanco.domain.utils.Utils;
-import com.example.apibanco.domain.validations.ClienteValidations;
+import com.example.apibanco.domain.validations.ContaValidations;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -34,7 +34,7 @@ public class ContaService {
     private TransferenciaRepository transferenciaRepository;
     private GerenteRepository gerenteRepository;
     private ModelMapper modelMapper;
-    private ClienteValidations clienteValidations;
+    private ContaValidations contaValidations;
 
     @Transactional
     public void salvarConta(Cliente cliente) {
@@ -49,7 +49,7 @@ public class ContaService {
     public ExtratoInput mostrarExtrato(Long conta_id) {
         HashMap<String, String> camposInvalidos = new HashMap<>();
 
-        clienteValidations.verificaContaClienteInativa(camposInvalidos, conta_id);
+        contaValidations.verificaContaClienteInativa(camposInvalidos, conta_id);
 
         Conta conta = contaRepository.getReferenceById(conta_id);
 

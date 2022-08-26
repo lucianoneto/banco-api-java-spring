@@ -1,6 +1,7 @@
 package com.example.apibanco.api.controller;
 
 import com.example.apibanco.api.model.ClienteInput;
+import com.example.apibanco.api.model.ClientePatchInput;
 import com.example.apibanco.domain.model.Cliente;
 import com.example.apibanco.domain.model.Conta;
 import com.example.apibanco.domain.model.Gerente;
@@ -48,6 +49,13 @@ public class GerenteController {
     @ResponseStatus(HttpStatus.CREATED)
     public Cliente adicionarCliente(@Valid @RequestBody ClienteInput clienteInput, @PathVariable Long gerente_id) {
         return clienteService.salvarCliente(clienteInput, gerente_id);
+    }
+
+    @Transactional
+    @PatchMapping("/{gerente_id}/attCliente/{cliente_id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Cliente atualizarCliente(@Valid @RequestBody ClientePatchInput clientePatchInput, @PathVariable Long gerente_id, @PathVariable Long cliente_id){
+        return clienteService.atualizarCliente(clientePatchInput, gerente_id, cliente_id);
     }
 
     @Transactional

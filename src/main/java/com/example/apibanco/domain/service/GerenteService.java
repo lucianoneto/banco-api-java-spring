@@ -26,7 +26,7 @@ public class GerenteService {
     public Gerente salvarGerente(Gerente gerente) {
         HashMap<String, String> camposInvalidos = new HashMap<>();
 
-        verificaCamposInvalidos(camposInvalidos, gerente.getCpf(), gerente.getEmail());
+        gerenteValidations.verificaCamposInvalidos(camposInvalidos, gerente.getCpf(), gerente.getEmail());
         gerente.setAtivo(true);
         return gerenteRepository.save(gerente);
     }
@@ -54,15 +54,6 @@ public class GerenteService {
         gerenteRepository.getReferenceById(gerente_id).setAtivo(true);
 
         return gerenteRepository.save(gerenteRepository.getReferenceById(gerente_id));
-    }
-
-    private void verificaCamposInvalidos(HashMap<String, String> camposInvalidos, String cpf, String email) {
-        if (gerenteRepository.existsByCpf(cpf))
-            camposInvalidos.put("cpf", "CPF already registered in the database.");
-        if (gerenteRepository.existsByEmail(email))
-            camposInvalidos.put("e-mail", "E-mail already registered in the database.");
-        if (!camposInvalidos.isEmpty())
-            throw new NegocioException("One or more fields are invalid.", camposInvalidos);
     }
 
 
