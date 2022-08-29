@@ -1,20 +1,13 @@
-# 🏦 Banco - Open API
+# 🏦 Bank- Open API
 
-Um projeto desenvolvido para adquirir experiência com as tecnologias utilizadas.
-A princípio era um banco simples para aprender a desenvolver em Java puro apenas 
-com lógica e sem grande visão de aplicações maiores, como por exemplo desenvolvimento
-do front-end, APIs para requisições, segurança e etc. 
+A project developed to gain experience with the technologies used. At first it was a simple bank to learn how to develop in pure Java with only logic and without great vision of larger applications, such as front-end development, APIs for requests, security, among others.
 
-Com o passar do tempo e com minha nova perspectiva a respeito do mundo da programação,
-tive a ideia de desenvolver uma API com as mesmas funcionalidades do banco feito
-em puro Java, ou seja, um projeto em que ocorre o controle da aplicação por meio do manager
-e o mesmo é capaz de gerenciar e registrar clientes, podendo inativá-los e também voltarem a ativa.
-Estes clientes são livres para organizar sua vida financeira através de funções de saque, depósito, 
-transferências e checagem de extrato.
+As time went by and with my new perspective on the programming world, I had the idea of developing an API with the same features as the bank made
+in pure Java, that is, a project in which the application is controlled through the manager and the same is able to manage and register clients, being able to inactivate them and also return to active. These customers are free to organize their financial life through withdrawal, deposit, transfers and extract checking.
 
-## 💻 Tecnologias
+## 💻 Technologies
 
-No desenvolvimento deste software foi utilizado: 
+In the development of this software was used: 
 
 - Java 11
 - Spring Boot
@@ -25,14 +18,14 @@ No desenvolvimento deste software foi utilizado:
 - Docker
 - MariaDB
 
-## ❔ Como utilizar a aplicação
+## ❔ How to use the application:
 
-Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de ambiente no seu .env:
+To run this project, you will need to add the following environment variables to your .env:
 
-`DATASOURCE_URL` - URL de acesso ao seu banco de dados.
+`DATASOURCE_URL` - URL to access your database.
 
-`DATASOURCE_USER` - USER para acessar seu banco de dados.
+`DATASOURCE_USER` - USER to access your database.
 
-`DATASOURCE_PASSWORD` - PASSWORD para acessar seu banco de dados.
+`DATASOURCE_PASSWORD` - PASSWORD to access your database.
 
-`DOCKER_PORTSDB` - PORTA utilizada para rodar container do Docker.
+`DOCKER_PORTSDB` - PORT used to run Docker container.
