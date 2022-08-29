@@ -29,8 +29,8 @@ public class Client {
     private Boolean active;
 
     @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "client_adress_id")
-    private ClientAddress adress;
+    @JoinColumn(name = "client_address_id")
+    private ClientAddress address;
 
     @JsonIgnore
     @ManyToOne

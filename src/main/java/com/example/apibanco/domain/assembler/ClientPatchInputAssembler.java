@@ -23,13 +23,13 @@ public class ClientPatchInputAssembler {
             ClientAddress novoEndereco = clientPatchInput.getAddress();
 
             if (novoEndereco.getStreet() != null)
-                client.getAdress().setStreet(novoEndereco.getStreet());
+                client.getAddress().setStreet(novoEndereco.getStreet());
             if (novoEndereco.getDistrict() != null)
-                client.getAdress().setDistrict(novoEndereco.getDistrict());
+                client.getAddress().setDistrict(novoEndereco.getDistrict());
             if (novoEndereco.getCEP() != null)
-                client.getAdress().setCEP(novoEndereco.getCEP());
+                client.getAddress().setCEP(novoEndereco.getCEP());
             if (novoEndereco.getNumber() != null)
-                client.getAdress().setNumber(novoEndereco.getNumber());
+                client.getAddress().setNumber(novoEndereco.getNumber());
         }
 
         return client;

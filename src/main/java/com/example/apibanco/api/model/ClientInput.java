@@ -38,5 +38,5 @@ public class ClientInput {
     private String email;
 
     @NotNull
-    private ClientAddress adress;
+    private ClientAddress address;
 }
