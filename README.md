@@ -14,19 +14,14 @@ transferências e checagem de extrato.
 
 ## 💻 Tecnologias
 
-Iniciei em 2022 minha carreira de Desenvolvedor de Software pela SeTi (Secretaria de Tecnologia e Informação),
-desde então me deram a oportunidade de começar a estudar novas tecnologias com apoio de pessoas com conhecimento.
-Aproveitei o estudo dessas novas ferramentas para engajar em projetos a parte, como foi o caso deste Banco.
-
-No desenvolvimento deste software foi utilizado Java como linguagem de programação
-e o Spring como framework, sendo eles Spring Data JPA, Spring Boot, Spring Web Services
-e por fim o Lombok e Model Mapper para agregar na criação do código. É utilizado Git para versionamento
-do programa e Docker para containerização do driver de Banco de Dados, sendo ele MariaDB.
+No desenvolvimento deste software foi utilizado: 
 
 - Java 11
 - Spring Boot
 - Spring Data JPA
 - Spring Web Services
+- Lombok
+- Model Mapper
 - Docker
 - MariaDB
 
