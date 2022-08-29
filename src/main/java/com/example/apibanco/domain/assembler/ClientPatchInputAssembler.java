@@ -2,7 +2,7 @@ package com.example.apibanco.domain.assembler;
 
 import com.example.apibanco.api.model.ClientPatchInput;
 import com.example.apibanco.domain.model.Client;
-import com.example.apibanco.domain.model.ClientAdress;
+import com.example.apibanco.domain.model.ClientAddress;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
@@ -19,8 +19,8 @@ public class ClientPatchInputAssembler {
             client.setPhone(clientPatchInput.getPhone());
         }
 
-        if (Objects.nonNull(clientPatchInput.getAdress())) {
-            ClientAdress novoEndereco = clientPatchInput.getAdress();
+        if (Objects.nonNull(clientPatchInput.getAddress())) {
+            ClientAddress novoEndereco = clientPatchInput.getAddress();
 
             if (novoEndereco.getStreet() != null)
                 client.getAdress().setStreet(novoEndereco.getStreet());

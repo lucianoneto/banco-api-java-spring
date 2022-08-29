@@ -1,6 +1,6 @@
 package com.example.apibanco.api.model;
 
-import com.example.apibanco.domain.model.ClientAdress;
+import com.example.apibanco.domain.model.ClientAddress;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,5 +20,5 @@ public class ClientPatchInput {
     @Size(max = 255)
     private String email;
 
-    private ClientAdress adress;
+    private ClientAddress address;
 }

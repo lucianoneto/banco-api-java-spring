@@ -1,6 +1,6 @@
 package com.example.apibanco.api.model;
 
-import com.example.apibanco.domain.model.ClientAdress;
+import com.example.apibanco.domain.model.ClientAddress;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,5 +38,5 @@ public class ClientInput {
     private String email;
 
     @NotNull
-    private ClientAdress adress;
+    private ClientAddress adress;
 }

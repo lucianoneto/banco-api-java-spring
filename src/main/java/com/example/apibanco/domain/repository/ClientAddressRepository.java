@@ -1,10 +1,10 @@
 package com.example.apibanco.domain.repository;
 
-import com.example.apibanco.domain.model.ClientAdress;
+import com.example.apibanco.domain.model.ClientAddress;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ClientAdressRepository extends JpaRepository<ClientAdress, Long> {
+public interface ClientAddressRepository extends JpaRepository<ClientAddress, Long> {
 
 }

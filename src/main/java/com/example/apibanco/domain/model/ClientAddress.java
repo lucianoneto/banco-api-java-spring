@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClientAdress {
+public class ClientAddress {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -30,7 +30,7 @@ public class Client {
 
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "client_adress_id")
-    private ClientAdress adress;
+    private ClientAddress adress;
 
     @JsonIgnore
     @ManyToOne
