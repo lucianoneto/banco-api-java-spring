@@ -30,12 +30,12 @@ public class ClientService {
     private ClientPatchInputAssembler clientPatchInputAssembler;
     private ClientValidations clientValidations;
 
-    public Client saveClient(ClientInput clientInput, Long gerente_id) {
-        HashMap<String, String> camposInvalidos = new HashMap<>();
+    public Client saveClient(ClientInput clientInput, Long manager_id) {
+        HashMap<String, String> invalidFields = new HashMap<>();
 
         Client client = modelMapper.map(clientInput, Client.class);
-        Manager manager = managerRepository.getReferenceById(gerente_id);
-        clientValidations.checkInvalidFields(camposInvalidos, gerente_id, client.getCpf(), client.getEmail());
+        Manager manager = managerRepository.getReferenceById(manager_id);
+        clientValidations.checkInvalidFields(invalidFields, manager_id, client.getCpf(), client.getEmail());
 
         client.setManager(manager);
         client.setActive(true);
@@ -45,40 +45,40 @@ public class ClientService {
         return clientRepository.save(client);
     }
 
-    public Client updateClient(ClientPatchInput clientPatchInput, Long gerente_id, Long cliente_id) {
-        HashMap<String, String> camposInvalidos = new HashMap<>();
+    public Client updateClient(ClientPatchInput clientPatchInput, Long manager_id, Long client_id) {
+        HashMap<String, String> invalidFields = new HashMap<>();
 
-        accountValidations.checkInactiveClientAccount(camposInvalidos, cliente_id);
-        managerValidations.checkManagerClientRelationship(camposInvalidos, gerente_id, cliente_id);
-        clientValidations.checkInvalidFields(camposInvalidos, gerente_id, clientPatchInput.getEmail());
+        accountValidations.checkInactiveClientAccount(invalidFields, client_id);
+        managerValidations.checkManagerClientRelationship(invalidFields, manager_id, client_id);
+        clientValidations.checkInvalidFields(invalidFields, manager_id, clientPatchInput.getEmail());
 
-        Client client = clientRepository.getReferenceById(cliente_id);
+        Client client = clientRepository.getReferenceById(client_id);
 
         client = clientPatchInputAssembler.merge(clientPatchInput, client);
 
         return clientRepository.save(client);
     }
-    public Client inactivateClient(Long gerente_id, Long cliente_id){
+    public Client inactivateClient(Long manager_id, Long client_id){
 
-        HashMap<String, String> camposInvalidos = new HashMap<>();
+        HashMap<String, String> invalidFields = new HashMap<>();
 
-        accountValidations.checkInactiveClientAccount(camposInvalidos, cliente_id);
-        managerValidations.checkManagerClientRelationship(camposInvalidos, gerente_id, cliente_id);
+        accountValidations.checkInactiveClientAccount(invalidFields, client_id);
+        managerValidations.checkManagerClientRelationship(invalidFields, manager_id, client_id);
 
-        Client client = clientRepository.getReferenceById(cliente_id);
+        Client client = clientRepository.getReferenceById(client_id);
 
         client.setActive(false);
 
         return clientRepository.save(client);
     }
 
-    public Client activateClient(Long gerente_id, Long cliente_id){
-        HashMap<String, String> camposInvalidos = new HashMap<>();
+    public Client activateClient(Long manager_id, Long client_id){
+        HashMap<String, String> invalidFields = new HashMap<>();
 
-        accountValidations.checkActiveClientAccount(camposInvalidos, cliente_id);
-        managerValidations.checkManagerClientRelationship(camposInvalidos, gerente_id, cliente_id);
+        accountValidations.checkActiveClientAccount(invalidFields, client_id);
+        managerValidations.checkManagerClientRelationship(invalidFields, manager_id, client_id);
 
-        Client client = clientRepository.getReferenceById(cliente_id);
+        Client client = clientRepository.getReferenceById(client_id);
 
         client.setActive(true);
 

@@ -30,29 +30,29 @@ public class ManagerService {
         return managerRepository.save(manager);
     }
 
-    public Manager inactivateManager(Long gerente_id, Long novoGerente_id){
+    public Manager inactivateManager(Long manager_id, Long newManager_id){
         HashMap<String, String> camposInvalidos = new HashMap<>();
-        managerValidations.checkInactiveManager(camposInvalidos, gerente_id, novoGerente_id);
+        managerValidations.checkInactiveManager(camposInvalidos, manager_id, newManager_id);
 
-        managerRepository.getReferenceById(gerente_id).setActive(false);
+        managerRepository.getReferenceById(manager_id).setActive(false);
 
-        Manager novoManager = managerRepository.getReferenceById(novoGerente_id);
+        Manager novoManager = managerRepository.getReferenceById(newManager_id);
 
-        List<Client> clientesVinculados = clientRepository.findClientsByManager_Id(gerente_id);
+        List<Client> linkedClients = clientRepository.findClientsByManager_Id(manager_id);
 
-        if (!clientesVinculados.isEmpty()) {
-            clientesVinculados.forEach(cliente -> cliente.setManager(novoManager));
-            clientRepository.saveAll(clientesVinculados);
+        if (!linkedClients.isEmpty()) {
+            linkedClients.forEach(client -> client.setManager(novoManager));
+            clientRepository.saveAll(linkedClients);
         }
-        return managerRepository.save(managerRepository.getReferenceById(gerente_id));
+        return managerRepository.save(managerRepository.getReferenceById(manager_id));
     }
 
-    public Manager activateManager(Long gerente_id){
+    public Manager activateManager(Long manager_id){
         HashMap<String, String> camposInvalidos = new HashMap<>();
-        managerValidations.checkActiveManager(camposInvalidos, gerente_id);
-        managerRepository.getReferenceById(gerente_id).setActive(true);
+        managerValidations.checkActiveManager(camposInvalidos, manager_id);
+        managerRepository.getReferenceById(manager_id).setActive(true);
 
-        return managerRepository.save(managerRepository.getReferenceById(gerente_id));
+        return managerRepository.save(managerRepository.getReferenceById(manager_id));
     }
 
 

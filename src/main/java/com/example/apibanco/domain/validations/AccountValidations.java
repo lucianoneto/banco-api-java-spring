@@ -16,26 +16,26 @@ public class AccountValidations {
     private AccountRepository accountRepository;
     private final MessageSource messageSource;
 
-    public void checkInactiveClientAccount(HashMap<String, String> camposInvalidos, Long conta_id){
-        checkExistsClientAccount(camposInvalidos, conta_id);
-        if(!accountRepository.getReferenceById(conta_id).getClient().getActive())
-            camposInvalidos.put("/idConta", messageSource.getMessage("conta.inactive", null, Locale.US));
-        if (!camposInvalidos.isEmpty())
-            throw new BusinessException(messageSource.getMessage("general.error", null, Locale.US), camposInvalidos);
+    public void checkInactiveClientAccount(HashMap<String, String> invalidFields, Long account_id){
+        checkExistsClientAccount(invalidFields, account_id);
+        if(!accountRepository.getReferenceById(account_id).getClient().getActive())
+            invalidFields.put("/idConta", messageSource.getMessage("account.inactive", null, Locale.US));
+        if (!invalidFields.isEmpty())
+            throw new BusinessException(messageSource.getMessage("general.error", null, Locale.US), invalidFields);
     }
 
-    public void checkActiveClientAccount(HashMap<String, String> camposInvalidos, Long conta_id){
-        checkExistsClientAccount(camposInvalidos, conta_id);
-        if(accountRepository.getReferenceById(conta_id).getClient().getActive())
-            camposInvalidos.put("/idConta", messageSource.getMessage("conta.active", null, Locale.US));
-        if (!camposInvalidos.isEmpty())
-            throw new BusinessException(messageSource.getMessage("general.error", null, Locale.US), camposInvalidos);
+    public void checkActiveClientAccount(HashMap<String, String> invalidFields, Long account_id){
+        checkExistsClientAccount(invalidFields, account_id);
+        if(accountRepository.getReferenceById(account_id).getClient().getActive())
+            invalidFields.put("/idConta", messageSource.getMessage("account.active", null, Locale.US));
+        if (!invalidFields.isEmpty())
+            throw new BusinessException(messageSource.getMessage("general.error", null, Locale.US), invalidFields);
     }
 
-    private void checkExistsClientAccount(HashMap<String, String> camposInvalidos, Long conta_id){
-        if (accountRepository.findById(conta_id).isEmpty())
-            camposInvalidos.put("/idConta", messageSource.getMessage("conta.not.exist", null, Locale.US));
-        if (!camposInvalidos.isEmpty())
-            throw new BusinessException(messageSource.getMessage("general.error", null, Locale.US), camposInvalidos);
+    private void checkExistsClientAccount(HashMap<String, String> invalidFields, Long account_id){
+        if (accountRepository.findById(account_id).isEmpty())
+            invalidFields.put("/idAccount", messageSource.getMessage("account.not.exist", null, Locale.US));
+        if (!invalidFields.isEmpty())
+            throw new BusinessException(messageSource.getMessage("general.error", null, Locale.US), invalidFields);
     }
 }

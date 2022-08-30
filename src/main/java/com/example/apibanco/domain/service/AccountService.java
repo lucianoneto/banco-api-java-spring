@@ -40,7 +40,7 @@ public class AccountService {
     public void saveAccount(Client client) {
         accountRepository.save(Account.builder()
                 .balance(0F)
-                .creationData(Utils.dateNow())
+                .creationDate(Utils.dateNow())
                 .creationTime(Utils.timeNow())
                 .client(client)
                 .build());

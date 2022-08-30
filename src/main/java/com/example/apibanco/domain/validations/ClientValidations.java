@@ -16,23 +16,23 @@ public class ClientValidations {
     ManagerValidations managerValidations;
     private final MessageSource messageSource;
 
-    public void checkInvalidFields(HashMap<String, String> camposInvalidos, Long gerente_id, String cpf, String email) {
-        managerValidations.checkExistsManager(camposInvalidos, gerente_id);
+    public void checkInvalidFields(HashMap<String, String> invalidFields, Long manager_id, String cpf, String email) {
+        managerValidations.checkExistsManager(invalidFields, manager_id);
 
         if (clientRepository.existsByCpf(cpf))
-            camposInvalidos.put("cpf", messageSource.getMessage("cpf.registered", null, Locale.US));
+            invalidFields.put("cpf", messageSource.getMessage("cpf.registered", null, Locale.US));
         if (clientRepository.existsByEmail(email))
-            camposInvalidos.put("e-mail", messageSource.getMessage("email.registered", null, Locale.US));
-        if (!camposInvalidos.isEmpty())
-            throw new BusinessException("One or more fields are invalid.", camposInvalidos);
+            invalidFields.put("e-mail", messageSource.getMessage("email.registered", null, Locale.US));
+        if (!invalidFields.isEmpty())
+            throw new BusinessException("One or more fields are invalid.", invalidFields);
     }
 
-    public void checkInvalidFields(HashMap<String, String> camposInvalidos, Long gerente_id, String email) {
-        managerValidations.checkExistsManager(camposInvalidos, gerente_id);
+    public void checkInvalidFields(HashMap<String, String> invalidFields, Long manager_id, String email) {
+        managerValidations.checkExistsManager(invalidFields, manager_id);
 
         if (clientRepository.existsByEmail(email))
-            camposInvalidos.put("e-mail", messageSource.getMessage("email.registered", null, Locale.US));
-        if (!camposInvalidos.isEmpty())
-            throw new BusinessException(messageSource.getMessage("general.error", null, Locale.US), camposInvalidos);
+            invalidFields.put("e-mail", messageSource.getMessage("email.registered", null, Locale.US));
+        if (!invalidFields.isEmpty())
+            throw new BusinessException(messageSource.getMessage("general.error", null, Locale.US), invalidFields);
     }
 }

@@ -23,13 +23,13 @@ public class Account {
     private Float balance;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private Date creationData;
+    private Date creationDate;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Time creationTime;
 
     @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "cliente_id", nullable = false)
+    @JoinColumn(name = "client_id", nullable = false)
     private Client client;
 
 }

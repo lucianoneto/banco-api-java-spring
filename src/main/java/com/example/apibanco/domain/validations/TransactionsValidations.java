@@ -17,29 +17,29 @@ public class TransactionsValidations {
     private AccountValidations accountValidations;
     private final MessageSource messageSource;
 
-    public void checkTransaction(HashMap<String, String> camposInvalidos, Float valor, Long conta_id) {
-        accountValidations.checkInactiveClientAccount(camposInvalidos,conta_id);
-        if (valor < 1)
-            camposInvalidos.put("valor", messageSource.getMessage("valor.invalid", null, Locale.US));
-        if (!camposInvalidos.isEmpty())
-            throw new BusinessException(messageSource.getMessage("general.error", null, Locale.US), camposInvalidos);
+    public void checkTransaction(HashMap<String, String> invalidFields, Float value, Long account_id) {
+        accountValidations.checkInactiveClientAccount(invalidFields,account_id);
+        if (value < 1)
+            invalidFields.put("value", messageSource.getMessage("value.invalid", null, Locale.US));
+        if (!invalidFields.isEmpty())
+            throw new BusinessException(messageSource.getMessage("general.error", null, Locale.US), invalidFields);
     }
 
-    public void checkWithdraw(HashMap<String, String> camposInvalidos, Float valor, Long conta_id) {
-        checkTransaction(camposInvalidos, valor, conta_id);
-        if (accountRepository.getReferenceById(conta_id).getBalance() < valor)
-            camposInvalidos.put("valorSaque", messageSource.getMessage("valor.enough", null, Locale.US));
-        if (!camposInvalidos.isEmpty())
-            throw new BusinessException(messageSource.getMessage("general.error", null, Locale.US), camposInvalidos);
+    public void checkWithdraw(HashMap<String, String> invalidFields, Float value, Long account_id) {
+        checkTransaction(invalidFields, value, account_id);
+        if (accountRepository.getReferenceById(account_id).getBalance() < value)
+            invalidFields.put("valueWithdraw", messageSource.getMessage("value.enough", null, Locale.US));
+        if (!invalidFields.isEmpty())
+            throw new BusinessException(messageSource.getMessage("general.error", null, Locale.US), invalidFields);
     }
 
-    public void checkTransfer(HashMap<String, String> camposInvalidos, Float valor, Long contaOrigem_id, Long contaDestino_id) {
-        checkTransaction(camposInvalidos, valor, contaOrigem_id);
-        accountValidations.checkInactiveClientAccount(camposInvalidos, contaDestino_id);
-        if (accountRepository.getReferenceById(contaOrigem_id).getBalance() < valor)
-            camposInvalidos.put("valorTransferencia", messageSource.getMessage("valor.enough", null, Locale.US));
-        if (!camposInvalidos.isEmpty())
-            throw new BusinessException(messageSource.getMessage("general.error", null, Locale.US), camposInvalidos);
+    public void checkTransfer(HashMap<String, String> invalidFields, Float value, Long originAccount_id, Long destinyAccount_id) {
+        checkTransaction(invalidFields, value, originAccount_id);
+        accountValidations.checkInactiveClientAccount(invalidFields, destinyAccount_id);
+        if (accountRepository.getReferenceById(originAccount_id).getBalance() < value)
+            invalidFields.put("valueTransfer", messageSource.getMessage("value.enough", null, Locale.US));
+        if (!invalidFields.isEmpty())
+            throw new BusinessException(messageSource.getMessage("general.error", null, Locale.US), invalidFields);
     }
 
 }
