@@ -57,7 +57,7 @@
 
 - 200 - Clients listed successfully.
 
-### Create Clientes
+### Create Clients
 
 ##### Creates a new Client.
 
@@ -126,7 +126,7 @@
 | Parameter   | Type       | Description                                   |
 | :---------- | :--------- | :------------------------------------------ |
 | `manager_id`      | `long` | **Required**. Manager ID. |
-| `client_id`      | `long` | **Required**. Cliente ID. |
+| `client_id`      | `long` | **Required**. Client ID. |
 
 #### Responses
 
@@ -138,12 +138,12 @@
 ##### Activates an existing inactivated client.
 
 ```http
-  PATCH /managers/{manager_id}/activateCliente/{client_id}
+  PATCH /managers/{manager_id}/activateClient/{client_id}
 ```
 | Parameter   | Type       | Description                                   |
 | :---------- | :--------- | :------------------------------------------ |
 | `gerente_id`      | `long` | **Required**. Manager ID. |
-| `cliente_id`      | `long` | **Required**. Client ID. |
+| `client_id`      | `long` | **Required**. Client ID. |
 
 #### Responses
 
