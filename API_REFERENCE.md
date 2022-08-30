@@ -1,282 +1,278 @@
 
-# Documentação da API
+# API Documentation
 
-## Gerente
+## Manager
 
-### Criar Gerentes
+### Create Manager
 
-##### Cria um novo manager.
+##### Creates a new manager.
 
 ```http
-  POST /gerentes
+  POST /managers
 ```
-#### Requisição
+#### Request
 
 #### Body
 
-| Parâmetro   | Tipo       | Descrição                           |
+| Parameter   | Type       | Description                           |
 | :---------- | :--------- | :---------------------------------- |
-| `nome` | `string` | **Obrigatório**. Nome do novo manager. |
-| `cpf` | `string` | **Obrigatório**. CPF do novo manager. |
-| `email` | `string` | **Obrigatório**. E-mail do novo manager. |
-| `telefone` | `string` | **Obrigatório**. Telefone do novo manager. |
+| `name` | `string` | **Required**. New manager name. |
+| `cpf` | `string` | **Required**. New manager CPF. |
+| `email` | `string` | **Required**. New manager e-mail. |
+| `phone` | `string` | **Required**. New manager phone. |
 
 
-#### Respostas
+#### Responses
 
-- 201 - Gerente criado com sucesso.
-- 400 - Presente no tópico "Respostas Padrão" no final da Documentação.
+- 201 - Manager created successfully.
+- 400 - Response in the "Default Responses" topic at the end of the Documentation.
 
 
-### Listar Clientes por Gerentes
+### List Clients by Managers
 
-##### Lista todos os clientes registrados por um manager específico.
+##### Lists all clients registered by a specific manager.
 
 ```http
-  GET /{gerente_id}/clientes
+  GET /{manager_id}/clients
 ```
 
-| Parâmetro   | Tipo       | Descrição                                   |
+| Parameter   | Type       | Description                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `gerente_id`      | `long` | **Obrigatório**. ID do manager. |
+| `manager_id`      | `long` | **Required**. Manager ID. |
 
 
-#### Respostas
+#### Responses
 
-- 200 - Gerente encontrado e clientes listados com sucesso.
-- 400 - Presente no tópico "Respostas Padrão" no final da Documentação.
+- 200 - Manager found and clients listed successfully.
+- 400 - Response in the "Default Responses" topic at the end of the Documentation.
 
-### Listar todos Clientes
+### List all Clients
 
-#### Lista todos os clientes registrados no banco.
-
-```http
-  GET /gerentes/clientes
-```
-#### Respostas
-
-- 200 - Clientes listados com sucesso.
-
-### Criar Clientes
-
-##### Cria um novo client.
+#### Lists all clients registered in the bank.
 
 ```http
-  POST /gerentes/{gerente_id}/addCliente
+  GET /managers/clients
+```
+#### Responses
+
+- 200 - Clients listed successfully.
+
+### Create Clientes
+
+##### Creates a new Client.
+
+```http
+  POST /managers/{manager_id}/addClient
 ```
 
-| Parâmetro   | Tipo       | Descrição                                   |
+| Parameter   | Type       | Description                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `gerente_id`      | `long` | **Obrigatório**. ID do manager. |
+| `manager_id`      | `long` | **Required**. Manager ID. |
 
-#### Requisição
+#### Request
 
 #### Body
 
-| Parâmetro   | Tipo       | Descrição                           |
+| Parameter   | Type       | Description                           |
 | :---------- | :--------- | :---------------------------------- |
-| `nome` | `string` | **Obrigatório**. Nome do novo client. |
-| `cpf` | `string` | **Obrigatório**. CPF do novo client. |
-| `email` | `string` | **Obrigatório**. E-mail do novo client. |
-| `telefone` | `string` | **Obrigatório**. Telefone do novo client. |
-| `endereco` | `endereco` | **Obrigatório**. Endereço do novo client (tipo especificado no final da Documentação). |
+| `name` | `string` | **Required**. New client name. |
+| `cpf` | `string` | **Required**. New client CPF. |
+| `email` | `string` | **Required**. New client e-mail. |
+| `phone` | `string` | **Required**. New client phone. |
+| `address` | `address` | **Required**. New client address (type specified at the end of the Documentation). |
 
 
-#### Respostas
+#### Responses
 
-- 201 - Cliente criado com sucesso.
-- 400 - Presente no tópico "Respostas Padrão" no final da Documentação.
+- 201 - Cliente created successfully.
+- 400 - Response in the "Default Responses" topic at the end of the Documentation.
 
-### Inativar Clientes
+### Inactivate Clients
 
-##### Inativa um client existente.
-
-```http
-  PATCH /gerentes/{gerente_id}/inativarCliente/{cliente_id}
-```
-
-| Parâmetro   | Tipo       | Descrição                                   |
-| :---------- | :--------- | :------------------------------------------ |
-| `gerente_id`      | `long` | **Obrigatório**. ID do manager. |
-| `cliente_id`      | `long` | **Obrigatório**. ID do client. |
-
-#### Respostas
-
-- 200 - Cliente inativado com sucesso.
-- 400 - Presente no tópico "Respostas Padrão" no final da Documentação.
-
-### Ativar Clientes
-
-##### Ativa um client existente inativado.
+##### Inactivates a existent client.
 
 ```http
-  PATCH /gerentes/{gerente_id}/ativarCliente/{cliente_id}
+  PATCH /managers/{manager_id}/inactivateClient/{client_id}
 ```
-| Parâmetro   | Tipo       | Descrição                                   |
+
+| Parameter   | Type       | Description                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `gerente_id`      | `long` | **Obrigatório**. ID do manager. |
-| `cliente_id`      | `long` | **Obrigatório**. ID do client. |
+| `manager_id`      | `long` | **Required**. Manager ID. |
+| `client_id`      | `long` | **Required**. Cliente ID. |
 
-#### Respostas
+#### Responses
 
-- 200 - Cliente ativado com sucesso.
-- 400 - Presente no tópico "Respostas Padrão" no final da Documentação.
+- 200 - Client inactivated successfully.
+- 400 - Response in the "Default Responses" topic at the end of the Documentation.
 
-### Inativar Gerentes
+### Activate Clients
 
-##### Inativa um manager existente, onde os clientes do mesmo são transferidos para outro manager ativo existente.
+##### Activates an existing inactivated client.
 
 ```http
-  PATCH /gerentes/{gerente_id}/inativar/{novoGerente_id}
+  PATCH /managers/{manager_id}/activateCliente/{client_id}
 ```
-| Parâmetro   | Tipo       | Descrição                                   |
+| Parameter   | Type       | Description                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `gerente_id`      | `long` | **Obrigatório**. ID do atual manager. |
-| `novoGerente_id`      | `long` | **Obrigatório**. ID do novo manager. |
+| `gerente_id`      | `long` | **Required**. Manager ID. |
+| `cliente_id`      | `long` | **Required**. Client ID. |
 
-#### Respostas
+#### Responses
 
-- 200 - Gerente inativado com sucesso.
-- 400 - Presente no tópico "Respostas Padrão" no final da Documentação.
+- 200 - Client activated successfully.
+- 400 - Response in the "Default Responses" topic at the end of the Documentation.
 
-### Ativar Gerentes
+### Inactivate Managers
 
-##### Ativa um manager existente inativado.
+##### Inactivates an existing manager, where its clients are transferred to another existing active manager.
 
 ```http
-  PATCH /gerentes/{gerente_id}/ativar
+  PATCH /managers/{manager_id}/inactivate/{newManager_id}
 ```
-| Parâmetro   | Tipo       | Descrição                                   |
+| Parameter   | Type       | Description                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `gerente_id`      | `long` | **Obrigatório**. ID do atual manager. |
+| `manager_id`      | `long` | **Required**. Current manager ID. |
+| `newManager_id`      | `long` | **Required**. New manager ID. |
 
-#### Respostas
+#### Responses
 
-- 200 - Gerente ativado com sucesso.
-- 400 - Presente no tópico "Respostas Padrão" no final da Documentação.
+- 200 - Manager inactivated successfuly.
+- 400 - Response in the "Default Responses" topic at the end of the Documentation.
+- 
+### Activate Managers
 
-## Contas
-
-### Listar Extratos
-
-##### Lista todas as transações efetuadas na account do client.
+#####  Actives an existing manager inactivated
 
 ```http
-  GET /contas/{conta_id}/extrato
+  PATCH /managers/{manager_id}/activate
 ```
-| Parâmetro   | Tipo       | Descrição                                   |
+| Parameter   | Type       | Description                                 |
 | :---------- | :--------- | :------------------------------------------ |
-| `conta_id`      | `long` | **Obrigatório**. ID da account. |
+| `manager_id`      | `long` | **Required**. Manager ID. |
 
-#### Respostas
+#### Responses
 
-- 200 - Conta encontrada e extrato listado com sucesso.
-- 400 - Presente no tópico "Respostas Padrão" no final da Documentação.
+- 200 - Manager activated successfuly.
+- 400 - Response in the "Default Responses" topic at the end of the Documentation.
 
-## Realizar Depósitos
+## Accounts
 
-##### Realiza Depósitos em uma account.
+### List Statement
+
+##### Lists all performed transactions on client's account.
 
 ```http
-  POST /contas/{conta_id}/depositos
+  GET /accounts/{account_id}/statement
+```
+| Parameter   | Type       | Description                            |
+| :---------- | :--------- | :------------------------------------------ |
+| `account_id`      | `long` | **Required**. Account ID. |
+
+#### Responses
+
+- 200 - Account found and statement listed successfully.
+- 400 - Response in the "Default Responses" topic at the end of the Documentation.
+
+## Make Deposits
+
+##### Make deposits into an account.
+
+```http
+  POST /accounts/{account_id}/deposits
 ```
 
-| Parâmetro   | Tipo       | Descrição                                   |
+| Parameter   | Type       | Description                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `conta_id`      | `long` | **Obrigatório**. ID da account. |
+| `account_id`      | `long` | **Required**. Account ID. |
 
-#### Requisição
+#### Request
 
 #### Body
 
-| Parâmetro   | Tipo       | Descrição                           |
+| Parameter   | Type       | Description                         |
 | :---------- | :--------- | :---------------------------------- |
-| `valor` | `float` | **Obrigatório**. Valor do depósito. |
+| `value` | `float` | **Required**. Deposit value. |
 
-#### Respostas
+#### Responses
 
-- 200 - Depósito realizado com sucesso.
-- 400 - Presente no tópico "Respostas Padrão" no final da Documentação.
+- 200 - Deposit made successfuly.
+- 400 - Response in the "Default Responses" topic at the end of the Documentation.
 
-## Realizar Saques
+## Make Withdraw
 
-##### Realiza saques em uma account.
+##### Make withdraws into an account.
 
 ```http
-  POST /contas/{conta_id}/saques
+  POST /accounts/{account_id}/withdraws
 ```
 
-| Parâmetro   | Tipo       | Descrição                                   |
+| Parameter   | Type       | Description                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `conta_id`      | `long` | **Obrigatório**. ID da account. |
+| `account_id`      | `long` | **Required**. Account ID. |
 
-#### Requisição
+#### Request
 
 #### Body
 
-| Parâmetro   | Tipo       | Descrição                           |
+| Parameter   | Type       | Description                         |
 | :---------- | :--------- | :---------------------------------- |
-| `valor` | `float` | **Obrigatório**. Valor do saque. |
+| `value` | `float` | **Required**. Withdraw value. |
 
-#### Respostas
+#### Responses
 
-- 200 - Saque realizado com sucesso.
-- 400 - Presente no tópico "Respostas Padrão" no final da Documentação.
+- 200 - Withdraw made successfuly.
+- 400 - Response in the "Default Responses" topic at the end of the Documentation.
 
-## Realizar Transferências
+## Make Tranfers
 
-##### Realiza transferências de uma account para outra.
+##### Make transfers from one account to another.
 
 ```http
-  POST /contas/{contaOrigem_id}/transferencias/{contaDestino_id}
+  POST /accounts/{originAccount_id}/transfers/{destinyAccount_id}
 ```
 
-| Parâmetro   | Tipo       | Descrição                                   |
+| Parameter   | Type       | Description                               |
 | :---------- | :--------- | :------------------------------------------ |
-| `contaOrigem_id`      | `long` | **Obrigatório**. ID da account de origem. |
-| `contaDestino_id`      | `long` | **Obrigatório**. ID da account de destino. |
+| `originAccount_id`      | `long` | **Required**. Origin account ID. |
+| `destinyAccount_id`      | `long` | **Required**. Destiny account ID. |
 
-#### Requisição
+#### Responses
 
 #### Body
 
-| Parâmetro   | Tipo       | Descrição                           |
+| Parameter   | Type       | Description                         |
 | :---------- | :--------- | :---------------------------------- |
-| `valor` | `float` | **Obrigatório**. Valor da transferência. |
+| `value` | `float` | **Required**. Transfer value. |
 
-#### Respostas
+#### Responses
 
-- 200 - Transferência realizada com sucesso.
-- 400 - Presente no tópico "Respostas Padrão" no final da Documentação.
+- 200 - Transfer made successfuly.
+- 400 - Response in the "Default Responses" topic at the end of the Documentation.
 
 --------------------
-## Tipos de Dados
+## Data Types
 
-#### Endereço
+#### Address
 
-| Parâmetro   | Tipo       | Descrição                           |
+| Parameter   | Type       | Description                         |
 | :---------- | :--------- | :---------------------------------- |
-| `cep` | `string` | **Obrigatório**. CEP do novo client. |
-| `logradouro` | `string` | **Obrigatório**. Logradouro do novo client. |
-| `numero` | `string` | **Obrigatório**. Numero do endereço do novo client. |
-| `setor` | `string` | **Obrigatório**. Setor do endereço do novo client. |
+| `cep` | `string` | **Required**. New client CEP. |
+| `street` | `string` | **Required**. New client street. |
+| `number` | `string` | **Required**. New client address number. |
+| `district` | `string` | **Required**. New client distrit. |
 
 -------------------
-## Respostas Padrão
+## Default Responses
 
 #### Status 400
 
-Algum campo foi enviado de forma incorreta (faltando, em branco ou `null`).
+Some field was sent incorrectly (missing, blank or `null`).
 
 #### Body 
 
-| Parâmetro   | Tipo       | Descrição                           |
+| Parameter   | Type       | Description                         |
 | :---------- | :--------- | :---------------------------------- |
-| `status` | `string` | Status da requisição. |
-| `dataHora` | `string` | Data e hora do erro. |
-| `titulo` | `string` | Mensagem generalizada de erros. |
-| `campo` | `string` | Mensagem específica de erros, diz o campo e qual o erro. |
-
-
-
-
+| `status` | `string` | Request status. |
+| `dateTime` | `string` | Error date and time. |
+| `title` | `string` | Error generic message. |
+| `field` | `string` | Error specific message, inform the field and which error is. |
