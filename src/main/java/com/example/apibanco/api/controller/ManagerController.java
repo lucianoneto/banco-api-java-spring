@@ -52,7 +52,7 @@ public class ManagerController {
     }
 
     @Transactional
-    @PatchMapping("/{manager_id}/attClient/{client_id}")
+    @PatchMapping("/{manager_id}/updateClient/{client_id}")
     @ResponseStatus(HttpStatus.OK)
     public Client updateClient(@Valid @RequestBody ClientPatchInput clientPatchInput, @PathVariable Long manager_id, @PathVariable Long client_id){
         return clientService.updateClient(clientPatchInput, manager_id, client_id);
