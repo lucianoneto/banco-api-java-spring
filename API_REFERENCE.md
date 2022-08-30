@@ -84,7 +84,35 @@
 
 #### Responses
 
-- 201 - Cliente created successfully.
+- 201 - Client created successfully.
+- 400 - Response in the "Default Responses" topic at the end of the Documentation.
+
+### Update Clients
+
+##### Updates an existent Client.
+
+```http
+  PATCH /managers/{manager_id}/updateClient/{client_id}
+```
+
+| Parameter   | Type       | Description                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `manager_id`      | `long` | **Required**. Manager ID. |
+|   `client_id`   |   `long` |  **Required**. Client ID.              |
+
+#### Request
+
+#### Body
+
+| Parameter   | Type       | Description                           |
+| :---------- | :--------- | :---------------------------------- |
+| `email` | `string` | **Optional**. Updated client e-mail. |
+| `phone` | `string` | **Optional**. Updated client phone. |
+| `address` | `address` | **Optional**. Updated client address (type specified at the end of the Documentation). |
+
+#### Responses
+
+- 201 - Client updated successfully.
 - 400 - Response in the "Default Responses" topic at the end of the Documentation.
 
 ### Inactivate Clients
