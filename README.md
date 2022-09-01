@@ -18,7 +18,7 @@ In the development of this software was used:
 - Docker
 - MariaDB
 
-## ❔ How to use the application:
+## ❔ How to use the application
 
 To run this project, you will need to add the following environment variables to your .env:
 
