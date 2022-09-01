@@ -29,3 +29,7 @@ To run this project, you will need to add the following environment variables to
 `DATASOURCE_PASSWORD` - PASSWORD to access your database.
 
 `DOCKER_PORTSDB` - PORT used to run Docker container.
+
+## 📄 API Documentation
+
+Here is the API Documentation: https://github.com/lucianoneto/banco-api-java-spring/blob/master/API_REFERENCE.md
