@@ -21,25 +21,25 @@ public class WithdrawService {
     private TransactionsValidations transactionsValidations;
 
     @Transactional
-    public Withdraw saveWithdraw(Long conta_id, Float valorSaque) {
-        HashMap<String, String> camposInvalidos = new HashMap<>();
+    public Withdraw saveWithdraw(Long account_id, Float withdrawValue) {
+        HashMap<String, String> invalidFields = new HashMap<>();
 
-        transactionsValidations.checkWithdraw(camposInvalidos, valorSaque, conta_id);
+        transactionsValidations.checkWithdraw(invalidFields, withdrawValue, account_id);
 
-        Account account = accountRepository.getReferenceById(conta_id);
-        Withdraw saque = Withdraw.builder()
-                .value(valorSaque)
+        Account account = accountRepository.getReferenceById(account_id);
+        Withdraw withdraw = Withdraw.builder()
+                .value(withdrawValue)
                 .date(Utils.dateNow())
                 .time(Utils.timeNow())
                 .account(account)
                 .build();
 
-        account.setBalance(account.getBalance() - saque.getValue());
+        account.setBalance(account.getBalance() - withdraw.getValue());
 
-        withdrawRepository.save(saque);
+        withdrawRepository.save(withdraw);
         accountRepository.save(account);
 
-        return saque;
+        return withdraw;
 
     }
 }

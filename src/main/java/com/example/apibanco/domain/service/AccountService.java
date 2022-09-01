@@ -1,19 +1,18 @@
 package com.example.apibanco.domain.service;
 
-import com.example.apibanco.api.exception.BusinessException;
 import com.example.apibanco.api.model.AccountOutput;
-import com.example.apibanco.api.model.ExtratoInput;
+import com.example.apibanco.api.model.StatementInput;
 import com.example.apibanco.api.model.TransferSentOutput;
 import com.example.apibanco.api.model.TransferReceivedOutput;
 import com.example.apibanco.domain.model.Account;
 import com.example.apibanco.domain.model.Client;
 import com.example.apibanco.domain.repository.AccountRepository;
-import com.example.apibanco.domain.repository.ManagerRepository;
 import com.example.apibanco.domain.repository.transactions.DepositRepository;
 import com.example.apibanco.domain.repository.transactions.WithdrawRepository;
-import com.example.apibanco.domain.repository.transactions.TransferenciaRepository;
+import com.example.apibanco.domain.repository.transactions.TransferRepository;
 import com.example.apibanco.domain.utils.Utils;
 import com.example.apibanco.domain.validations.AccountValidations;
+import com.example.apibanco.domain.validations.ManagerValidations;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -31,8 +30,8 @@ public class AccountService {
     private AccountRepository accountRepository;
     private DepositRepository depositRepository;
     private WithdrawRepository withdrawRepository;
-    private TransferenciaRepository transferenciaRepository;
-    private ManagerRepository managerRepository;
+    private TransferRepository transferRepository;
+    ManagerValidations managerValidations;
     private ModelMapper modelMapper;
     private AccountValidations accountValidations;
 
@@ -46,35 +45,32 @@ public class AccountService {
                 .build());
     }
 
-    public ExtratoInput showBankStatement(Long conta_id) {
-        HashMap<String, String> camposInvalidos = new HashMap<>();
+    public StatementInput showBankStatement(Long account_id) {
+        HashMap<String, String> invalidFields = new HashMap<>();
 
-        accountValidations.checkInactiveClientAccount(camposInvalidos, conta_id);
+        accountValidations.checkInactiveClientAccount(invalidFields, account_id);
 
-        Account account = accountRepository.getReferenceById(conta_id);
+        Account account = accountRepository.getReferenceById(account_id);
 
-        return ExtratoInput.builder()
+        return StatementInput.builder()
                 .account(modelMapper.map(account, AccountOutput.class))
-                .deposits(depositRepository.getByAccount_Id(conta_id))
-                .withdraws(withdrawRepository.getByAccount_Id(conta_id))
-                .transferSentOutputs(transferenciaRepository.getByOriginAccountId(conta_id)
+                .deposits(depositRepository.getByAccount_Id(account_id))
+                .withdraws(withdrawRepository.getByAccount_Id(account_id))
+                .transferSentOutputs(transferRepository.getByOriginAccountId(account_id)
                         .stream()
-                        .map(transferenciaEnviada -> modelMapper.map(transferenciaEnviada, TransferSentOutput.class))
+                        .map(transferSent -> modelMapper.map(transferSent, TransferSentOutput.class))
                         .collect(Collectors.toList()))
-                .transferReceivedOutputs(transferenciaRepository.getByDestinyAccountId(conta_id)
+                .transferReceivedOutputs(transferRepository.getByDestinyAccountId(account_id)
                         .stream()
-                        .map(transferenciaRecebida -> modelMapper.map(transferenciaRecebida, TransferReceivedOutput.class))
+                        .map(transferReceived -> modelMapper.map(transferReceived, TransferReceivedOutput.class))
                         .collect(Collectors.toList()))
                 .build();
     }
 
-    public List<Account> showAccountsByManager(Long gerente_id) {
-        HashMap<String, String> camposInvalidos = new HashMap<>();
-        if (managerRepository.findById(gerente_id).isEmpty())
-            camposInvalidos.put("/idGerente", "Gerente does not exist in the database");
-        if (!camposInvalidos.isEmpty())
-            throw new BusinessException("One or more fields are invalid.", camposInvalidos);
-        return accountRepository.findAccountByClient_Manager_Id(gerente_id);
+    public List<Account> showAccountsByManager(Long manager_id) {
+        HashMap<String, String> invalidFields = new HashMap<>();
+        managerValidations.checkExistsManager(invalidFields, manager_id);
+        return accountRepository.findAccountByClient_Manager_Id(manager_id);
     }
 
     public List<Account> showAllAccounts(){

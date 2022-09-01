@@ -19,7 +19,7 @@ public class AccountValidations {
     public void checkInactiveClientAccount(HashMap<String, String> invalidFields, Long account_id){
         checkExistsClientAccount(invalidFields, account_id);
         if(!accountRepository.getReferenceById(account_id).getClient().getActive())
-            invalidFields.put("/idConta", messageSource.getMessage("account.inactive", null, Locale.US));
+            invalidFields.put("/idAccount", messageSource.getMessage("account.inactive", null, Locale.US));
         if (!invalidFields.isEmpty())
             throw new BusinessException(messageSource.getMessage("general.error", null, Locale.US), invalidFields);
     }
@@ -27,7 +27,7 @@ public class AccountValidations {
     public void checkActiveClientAccount(HashMap<String, String> invalidFields, Long account_id){
         checkExistsClientAccount(invalidFields, account_id);
         if(accountRepository.getReferenceById(account_id).getClient().getActive())
-            invalidFields.put("/idConta", messageSource.getMessage("account.active", null, Locale.US));
+            invalidFields.put("/idAccount", messageSource.getMessage("account.active", null, Locale.US));
         if (!invalidFields.isEmpty())
             throw new BusinessException(messageSource.getMessage("general.error", null, Locale.US), invalidFields);
     }

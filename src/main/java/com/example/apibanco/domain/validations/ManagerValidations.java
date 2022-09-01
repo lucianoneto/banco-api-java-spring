@@ -42,13 +42,13 @@ public class ManagerValidations {
             throw new BusinessException(messageSource.getMessage("general.error", null, Locale.US), invalidFields);
     }
 
-    public void checkManagerClientRelationship(HashMap<String, String> invalidFields, Long manager_id, Long cliente_id){
+    public void checkManagerClientRelationship(HashMap<String, String> invalidFields, Long manager_id, Long client_id){
         checkExistsManager(invalidFields, manager_id);
 
         if(!managerRepository.getReferenceById(manager_id).getActive())
             invalidFields.put("/idManager", messageSource.getMessage("manager.inactive", null, Locale.US));
-        if(!Objects.equals(clientRepository.getReferenceById(cliente_id).getManager().getId(), manager_id))
-            invalidFields.put("/idCliente", messageSource.getMessage("manager.client.relationship", null, Locale.US));
+        if(!Objects.equals(clientRepository.getReferenceById(client_id).getManager().getId(), manager_id))
+            invalidFields.put("/idClient", messageSource.getMessage("manager.client.relationship", null, Locale.US));
         if (!invalidFields.isEmpty())
             throw new BusinessException(messageSource.getMessage("general.error", null, Locale.US), invalidFields);
     }

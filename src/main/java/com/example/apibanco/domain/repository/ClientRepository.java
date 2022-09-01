@@ -13,6 +13,6 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
     Optional<Client> findById(Long id);
     boolean existsByCpf(String cpf);
     boolean existsByEmail(String email);
-    List<Client> findClientsByManager_Id(Long gerente_id);
+    List<Client> findClientsByManager_Id(Long manager_id);
 
 }

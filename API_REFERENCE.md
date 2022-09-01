@@ -140,10 +140,10 @@
 ```http
   PATCH /managers/{manager_id}/activateClient/{client_id}
 ```
-| Parameter   | Type       | Description                                   |
-| :---------- | :--------- | :------------------------------------------ |
-| `gerente_id`      | `long` | **Required**. Manager ID. |
-| `client_id`      | `long` | **Required**. Client ID. |
+| Parameter    | Type       | Description                                   |
+|:-------------| :--------- | :------------------------------------------ |
+| `manager_id` | `long` | **Required**. Manager ID. |
+| `client_id`  | `long` | **Required**. Client ID. |
 
 #### Responses
 

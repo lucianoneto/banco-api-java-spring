@@ -20,16 +20,16 @@ public class ClientPatchInputAssembler {
         }
 
         if (Objects.nonNull(clientPatchInput.getAddress())) {
-            ClientAddress novoEndereco = clientPatchInput.getAddress();
+            ClientAddress newAddress = clientPatchInput.getAddress();
 
-            if (novoEndereco.getStreet() != null)
-                client.getAddress().setStreet(novoEndereco.getStreet());
-            if (novoEndereco.getDistrict() != null)
-                client.getAddress().setDistrict(novoEndereco.getDistrict());
-            if (novoEndereco.getCEP() != null)
-                client.getAddress().setCEP(novoEndereco.getCEP());
-            if (novoEndereco.getNumber() != null)
-                client.getAddress().setNumber(novoEndereco.getNumber());
+            if (newAddress.getStreet() != null)
+                client.getAddress().setStreet(newAddress.getStreet());
+            if (newAddress.getDistrict() != null)
+                client.getAddress().setDistrict(newAddress.getDistrict());
+            if (newAddress.getCEP() != null)
+                client.getAddress().setCEP(newAddress.getCEP());
+            if (newAddress.getNumber() != null)
+                client.getAddress().setNumber(newAddress.getNumber());
         }
 
         return client;

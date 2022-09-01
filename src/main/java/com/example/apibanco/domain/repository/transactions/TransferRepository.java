@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface TransferenciaRepository extends JpaRepository<Transfer, Long> {
+public interface TransferRepository extends JpaRepository<Transfer, Long> {
 
     List<Transfer> getByOriginAccountId(Long id);
 

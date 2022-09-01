@@ -22,14 +22,14 @@ public class DepositService {
     private TransactionsValidations transactionsValidations;
 
     @Transactional
-    public Deposit saveDeposit(Long conta_id, Float valorDeposito) {
-        HashMap<String, String> camposInvalidos = new HashMap<>();
+    public Deposit saveDeposit(Long account_id, Float depositValue) {
+        HashMap<String, String> invalidFields = new HashMap<>();
 
-        transactionsValidations.checkTransaction(camposInvalidos, valorDeposito, conta_id);
+        transactionsValidations.checkTransaction(invalidFields, depositValue, account_id);
 
-        Account account = accountRepository.getReferenceById(conta_id);
+        Account account = accountRepository.getReferenceById(account_id);
         Deposit deposit = Deposit.builder()
-                .value(valorDeposito)
+                .value(depositValue)
                 .date(Utils.dateNow())
                 .time(Utils.timeNow())
                 .account(account)

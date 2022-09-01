@@ -23,16 +23,16 @@ public class ManagerService {
 
     @Transactional
     public Manager saveManager(Manager manager) {
-        HashMap<String, String> camposInvalidos = new HashMap<>();
+        HashMap<String, String> invalidFields = new HashMap<>();
 
-        managerValidations.checkInvalidFields(camposInvalidos, manager.getCpf(), manager.getEmail());
+        managerValidations.checkInvalidFields(invalidFields, manager.getCpf(), manager.getEmail());
         manager.setActive(true);
         return managerRepository.save(manager);
     }
 
     public Manager inactivateManager(Long manager_id, Long newManager_id){
-        HashMap<String, String> camposInvalidos = new HashMap<>();
-        managerValidations.checkInactiveManager(camposInvalidos, manager_id, newManager_id);
+        HashMap<String, String> invalidFields = new HashMap<>();
+        managerValidations.checkInactiveManager(invalidFields, manager_id, newManager_id);
 
         managerRepository.getReferenceById(manager_id).setActive(false);
 
@@ -48,8 +48,8 @@ public class ManagerService {
     }
 
     public Manager activateManager(Long manager_id){
-        HashMap<String, String> camposInvalidos = new HashMap<>();
-        managerValidations.checkActiveManager(camposInvalidos, manager_id);
+        HashMap<String, String> invalidFields = new HashMap<>();
+        managerValidations.checkActiveManager(invalidFields, manager_id);
         managerRepository.getReferenceById(manager_id).setActive(true);
 
         return managerRepository.save(managerRepository.getReferenceById(manager_id));
