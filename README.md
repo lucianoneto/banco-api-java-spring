@@ -3,7 +3,7 @@
 A project developed to gain experience with the technologies used. At first it was a simple bank to learn how to develop in pure Java with only logic and without great vision of larger applications, such as front-end development, APIs for requests, security, among others.
 
 As time went by and with my new perspective on the programming world, I had the idea of developing an API with the same features as the bank made
-in pure Java, that is, a project in which the application is controlled through the manager and the same is able to manage and register clients, being able to inactivate them and also return to active. These customers are free to organize their financial life through withdrawal, deposit, transfers and extract checking.
+in pure Java, that is, a project in which the application is controlled through the manager and the same is able to manage and register clients, being able to inactivate them and also return to active. These customers are free to organize their financial life through withdraw, deposit, transfers and extract checking.
 
 ## 💻 Technologies
 
