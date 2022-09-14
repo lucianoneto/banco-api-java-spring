@@ -4,4 +4,4 @@ services:
     environment:
       MARIADB_ROOT_PASSWORD: ${DATASOURCE_PASSWORD}
     ports:
-      - ${DOCKER_PORTSDB}
+      - "3306:3306"

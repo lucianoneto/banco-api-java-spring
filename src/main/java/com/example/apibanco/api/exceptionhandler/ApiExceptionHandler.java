@@ -1,6 +1,7 @@
 package com.example.apibanco.api.exceptionhandler;
 
 import com.example.apibanco.api.exception.BusinessException;
+import com.example.apibanco.domain.utils.MessagesConstants;
 import lombok.AllArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpHeaders;
@@ -34,7 +35,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(ex, Error.builder()
                         .status(status.value())
                         .dateTime(LocalDateTime.now())
-                        .title(messageSource.getMessage("general.error", null, Locale.US))
+                        .title(messageSource.getMessage(MessagesConstants.GENERAL_ERROR, null, Locale.US))
                         .invalidFields(invalidFields)
                         .build()
                 , headers, status, request);
