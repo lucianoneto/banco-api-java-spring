@@ -18,61 +18,61 @@ public class ManagerValidations {
 
     private ManagerRepository managerRepository;
     private ClientRepository clientRepository;
-    private final MessageSource messageSource;
+    private MessageSource messageSource;
 
-    public void checkInactiveManager(HashMap<String, String> invalidFields, Long manager_id, Long newManager_id){
-        checkExistsManager(invalidFields, manager_id);
-        checkExistsNewManager(invalidFields, newManager_id);
+    public void checkInactiveManager(HashMap<String, String> invalidFields, Long managerId, Long newManagerId) {
+        checkExistsManager(invalidFields, managerId);
+        checkExistsNewManager(invalidFields, newManagerId);
 
-        if(!managerRepository.getReferenceById(manager_id).getActive())
-            invalidFields.put("/idManager", messageSource.getMessage("manager.inactive", null, Locale.US));
-        if(!managerRepository.getReferenceById(newManager_id).getActive())
-            invalidFields.put("/idNewManager", messageSource.getMessage("manager.inactive", null, Locale.US));
-        if(manager_id.equals(newManager_id))
-            invalidFields.put("/idManager", messageSource.getMessage("managers.equals", null, Locale.US));
+        if (Boolean.FALSE.equals(managerRepository.getReferenceById(managerId).getActive()))
+            invalidFields.put(MessagesConstants.ID_MANAGER, messageSource.getMessage(MessagesConstants.MANAGER_INACTIVE, null, Locale.US));
+        if (Boolean.FALSE.equals(managerRepository.getReferenceById(newManagerId).getActive()))
+            invalidFields.put(MessagesConstants.ID_NEW_MANAGER, messageSource.getMessage(MessagesConstants.MANAGER_INACTIVE, null, Locale.US));
+        if (managerId.equals(newManagerId))
+            invalidFields.put(MessagesConstants.ID_MANAGER, messageSource.getMessage(MessagesConstants.MANAGER_EQUALS, null, Locale.US));
         if (!invalidFields.isEmpty())
             throw new BusinessException(messageSource.getMessage(MessagesConstants.GENERAL_ERROR, null, Locale.US), invalidFields);
     }
 
-    public void checkActiveManager(HashMap<String, String> invalidFields, Long manager_id){
-        checkExistsManager(invalidFields, manager_id);
+    public void checkActiveManager(HashMap<String, String> invalidFields, Long managerId) {
+        checkExistsManager(invalidFields, managerId);
 
-        if(managerRepository.getReferenceById(manager_id).getActive())
-            invalidFields.put("/idManager", messageSource.getMessage("manager.active", null, Locale.US));
+        if (Boolean.TRUE.equals(managerRepository.getReferenceById(managerId).getActive()))
+            invalidFields.put(MessagesConstants.ID_MANAGER, messageSource.getMessage(MessagesConstants.MANAGER_ACTIVE, null, Locale.US));
         if (!invalidFields.isEmpty())
             throw new BusinessException(messageSource.getMessage(MessagesConstants.GENERAL_ERROR, null, Locale.US), invalidFields);
     }
 
-    public void checkManagerClientRelationship(HashMap<String, String> invalidFields, Long manager_id, Long client_id){
-        checkExistsManager(invalidFields, manager_id);
+    public void checkManagerClientRelationship(HashMap<String, String> invalidFields, Long managerId, Long clientId) {
+        checkExistsManager(invalidFields, managerId);
 
-        if(!managerRepository.getReferenceById(manager_id).getActive())
-            invalidFields.put("/idManager", messageSource.getMessage("manager.inactive", null, Locale.US));
-        if(!Objects.equals(clientRepository.getReferenceById(client_id).getManager().getId(), manager_id))
-            invalidFields.put("/idClient", messageSource.getMessage("manager.client.relationship", null, Locale.US));
+        if (Boolean.FALSE.equals(managerRepository.getReferenceById(managerId).getActive()))
+            invalidFields.put(MessagesConstants.ID_MANAGER, messageSource.getMessage(MessagesConstants.MANAGER_INACTIVE, null, Locale.US));
+        if (!Objects.equals(clientRepository.getReferenceById(clientId).getManager().getId(), managerId))
+            invalidFields.put(MessagesConstants.ID_CLIENT, messageSource.getMessage(MessagesConstants.MANAGER_CLIENT_RELATIONSHIP, null, Locale.US));
         if (!invalidFields.isEmpty())
             throw new BusinessException(messageSource.getMessage(MessagesConstants.GENERAL_ERROR, null, Locale.US), invalidFields);
     }
 
-    public void checkExistsManager(HashMap<String, String> invalidFields, Long manager_id){
-        if (managerRepository.findById(manager_id).isEmpty())
-            invalidFields.put("/idManager", messageSource.getMessage("manager.not.exist", null, Locale.US));
+    public void checkExistsManager(HashMap<String, String> invalidFields, Long managerId) {
+        if (managerRepository.findById(managerId).isEmpty())
+            invalidFields.put(MessagesConstants.ID_MANAGER, messageSource.getMessage(MessagesConstants.MANAGER_NOT_EXIST, null, Locale.US));
         if (!invalidFields.isEmpty())
             throw new BusinessException(messageSource.getMessage(MessagesConstants.GENERAL_ERROR, null, Locale.US), invalidFields);
     }
 
-    private void checkExistsNewManager(HashMap<String, String> invalidFields, Long newManager_id){
-        if (managerRepository.findById(newManager_id).isEmpty())
-            invalidFields.put("/idNewManager", messageSource.getMessage("manager.not.exist", null, Locale.US));
+    private void checkExistsNewManager(HashMap<String, String> invalidFields, Long newManagerId) {
+        if (managerRepository.findById(newManagerId).isEmpty())
+            invalidFields.put(MessagesConstants.ID_NEW_MANAGER, messageSource.getMessage(MessagesConstants.MANAGER_NOT_EXIST, null, Locale.US));
         if (!invalidFields.isEmpty())
             throw new BusinessException(messageSource.getMessage(MessagesConstants.GENERAL_ERROR, null, Locale.US), invalidFields);
     }
 
     public void checkInvalidFields(HashMap<String, String> invalidFields, String cpf, String email) {
         if (managerRepository.existsByCpf(cpf))
-            invalidFields.put("cpf", messageSource.getMessage("cpf.registered", null, Locale.US));
+            invalidFields.put(MessagesConstants.CPF, messageSource.getMessage(MessagesConstants.CPF_REGISTERED, null, Locale.US));
         if (managerRepository.existsByEmail(email))
-            invalidFields.put("e-mail", messageSource.getMessage("email.registered", null, Locale.US));
+            invalidFields.put(MessagesConstants.EMAIL, messageSource.getMessage(MessagesConstants.EMAIL_REGISTERED, null, Locale.US));
         if (!invalidFields.isEmpty())
             throw new BusinessException(messageSource.getMessage(MessagesConstants.GENERAL_ERROR, null, Locale.US), invalidFields);
     }

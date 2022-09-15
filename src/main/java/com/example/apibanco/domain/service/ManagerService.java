@@ -30,29 +30,29 @@ public class ManagerService {
         return managerRepository.save(manager);
     }
 
-    public Manager inactivateManager(Long manager_id, Long newManager_id){
+    public Manager inactivateManager(Long managerId, Long newManagerId) {
         HashMap<String, String> invalidFields = new HashMap<>();
-        managerValidations.checkInactiveManager(invalidFields, manager_id, newManager_id);
+        managerValidations.checkInactiveManager(invalidFields, managerId, newManagerId);
 
-        managerRepository.getReferenceById(manager_id).setActive(false);
+        managerRepository.getReferenceById(managerId).setActive(false);
 
-        Manager novoManager = managerRepository.getReferenceById(newManager_id);
+        Manager novoManager = managerRepository.getReferenceById(newManagerId);
 
-        List<Client> linkedClients = clientRepository.findClientsByManager_Id(manager_id);
+        List<Client> linkedClients = clientRepository.findClientsByManagerId(managerId);
 
         if (!linkedClients.isEmpty()) {
             linkedClients.forEach(client -> client.setManager(novoManager));
             clientRepository.saveAll(linkedClients);
         }
-        return managerRepository.save(managerRepository.getReferenceById(manager_id));
+        return managerRepository.save(managerRepository.getReferenceById(managerId));
     }
 
-    public Manager activateManager(Long manager_id){
+    public Manager activateManager(Long managerId) {
         HashMap<String, String> invalidFields = new HashMap<>();
-        managerValidations.checkActiveManager(invalidFields, manager_id);
-        managerRepository.getReferenceById(manager_id).setActive(true);
+        managerValidations.checkActiveManager(invalidFields, managerId);
+        managerRepository.getReferenceById(managerId).setActive(true);
 
-        return managerRepository.save(managerRepository.getReferenceById(manager_id));
+        return managerRepository.save(managerRepository.getReferenceById(managerId));
     }
 
 

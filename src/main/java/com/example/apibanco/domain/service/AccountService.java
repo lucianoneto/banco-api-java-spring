@@ -2,15 +2,14 @@ package com.example.apibanco.domain.service;
 
 import com.example.apibanco.api.model.AccountOutput;
 import com.example.apibanco.api.model.StatementInput;
-import com.example.apibanco.api.model.TransferSentOutput;
 import com.example.apibanco.api.model.TransferReceivedOutput;
+import com.example.apibanco.api.model.TransferSentOutput;
 import com.example.apibanco.domain.model.Account;
 import com.example.apibanco.domain.model.Client;
 import com.example.apibanco.domain.repository.AccountRepository;
 import com.example.apibanco.domain.repository.transactions.DepositRepository;
-import com.example.apibanco.domain.repository.transactions.WithdrawRepository;
 import com.example.apibanco.domain.repository.transactions.TransferRepository;
-import com.example.apibanco.domain.utils.Utils;
+import com.example.apibanco.domain.repository.transactions.WithdrawRepository;
 import com.example.apibanco.domain.validations.AccountValidations;
 import com.example.apibanco.domain.validations.ManagerValidations;
 import lombok.AllArgsConstructor;
@@ -18,6 +17,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,43 +38,42 @@ public class AccountService {
 
     @Transactional
     public void saveAccount(Client client) {
-        accountRepository.save(Account.builder()
-                .balance(0F)
-                .creationDate(Utils.dateNow())
-                .creationTime(Utils.timeNow())
-                .client(client)
-                .build());
+        accountRepository.save(new Account()
+                .setBalance(0)
+                .setCreationDate(LocalDate.now())
+                .setCreationTime(LocalTime.now())
+                .setClient(client));
     }
 
-    public StatementInput showBankStatement(Long account_id) {
+    public StatementInput showBankStatement(Long accountId) {
         HashMap<String, String> invalidFields = new HashMap<>();
 
-        accountValidations.checkInactiveClientAccount(invalidFields, account_id);
+        accountValidations.checkInactiveClientAccount(invalidFields, accountId);
 
-        Account account = accountRepository.getReferenceById(account_id);
+        Account account = accountRepository.getReferenceById(accountId);
 
         return StatementInput.builder()
                 .account(modelMapper.map(account, AccountOutput.class))
-                .deposits(depositRepository.getByAccount_Id(account_id))
-                .withdraws(withdrawRepository.getByAccount_Id(account_id))
-                .transferSentOutputs(transferRepository.getByOriginAccountId(account_id)
+                .deposits(depositRepository.getByAccountId(accountId))
+                .withdraws(withdrawRepository.getByAccountId(accountId))
+                .transferSentOutputs(transferRepository.getByOriginAccountId(accountId)
                         .stream()
                         .map(transferSent -> modelMapper.map(transferSent, TransferSentOutput.class))
                         .collect(Collectors.toList()))
-                .transferReceivedOutputs(transferRepository.getByDestinyAccountId(account_id)
+                .transferReceivedOutputs(transferRepository.getByDestinyAccountId(accountId)
                         .stream()
                         .map(transferReceived -> modelMapper.map(transferReceived, TransferReceivedOutput.class))
                         .collect(Collectors.toList()))
                 .build();
     }
 
-    public List<Account> showAccountsByManager(Long manager_id) {
+    public List<Account> showAccountsByManager(Long managerId) {
         HashMap<String, String> invalidFields = new HashMap<>();
-        managerValidations.checkExistsManager(invalidFields, manager_id);
-        return accountRepository.findAccountByClient_Manager_Id(manager_id);
+        managerValidations.checkExistsManager(invalidFields, managerId);
+        return accountRepository.findAccountByClientManagerId(managerId);
     }
 
-    public List<Account> showAllAccounts(){
+    public List<Account> showAllAccounts() {
         return accountRepository.findAll();
     }
 

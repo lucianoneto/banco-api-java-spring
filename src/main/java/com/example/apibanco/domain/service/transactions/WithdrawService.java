@@ -4,12 +4,13 @@ import com.example.apibanco.domain.model.Account;
 import com.example.apibanco.domain.model.transactions.Withdraw;
 import com.example.apibanco.domain.repository.AccountRepository;
 import com.example.apibanco.domain.repository.transactions.WithdrawRepository;
-import com.example.apibanco.domain.utils.Utils;
 import com.example.apibanco.domain.validations.TransactionsValidations;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashMap;
 
 @Service
@@ -21,18 +22,17 @@ public class WithdrawService {
     private TransactionsValidations transactionsValidations;
 
     @Transactional
-    public Withdraw saveWithdraw(Long account_id, Float withdrawValue) {
+    public Withdraw saveWithdraw(Long accountId, float withdrawValue) {
         HashMap<String, String> invalidFields = new HashMap<>();
 
-        transactionsValidations.checkWithdraw(invalidFields, withdrawValue, account_id);
+        transactionsValidations.checkWithdraw(invalidFields, withdrawValue, accountId);
 
-        Account account = accountRepository.getReferenceById(account_id);
-        Withdraw withdraw = Withdraw.builder()
-                .value(withdrawValue)
-                .date(Utils.dateNow())
-                .time(Utils.timeNow())
-                .account(account)
-                .build();
+        Account account = accountRepository.getReferenceById(accountId);
+        Withdraw withdraw = new Withdraw()
+                .setValue(withdrawValue)
+                .setDate(LocalDate.now())
+                .setTime(LocalTime.now())
+                .setAccount(account);
 
         account.setBalance(account.getBalance() - withdraw.getValue());
 

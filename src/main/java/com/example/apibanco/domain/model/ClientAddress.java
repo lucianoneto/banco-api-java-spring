@@ -4,16 +4,21 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Getter
 @Setter
-@Entity
+@Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 public class ClientAddress {
 
     @Id
@@ -34,7 +39,7 @@ public class ClientAddress {
 
     @NotBlank
     @Size(max = 8, min = 8)
-    private String CEP;
+    private String zipCode;
 
 
 }

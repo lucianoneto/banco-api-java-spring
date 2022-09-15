@@ -24,12 +24,14 @@ import java.util.Locale;
 @AllArgsConstructor
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     MessageSource messageSource;
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         HashMap<String, String> invalidFields = new HashMap<>();
         for (ObjectError problem : ex.getBindingResult().getAllErrors()) {
             String name = ((FieldError) problem).getField();
-            String message = messageSource.getMessage("blank.error", null, Locale.US);
+            String message;
+            message = problem.getDefaultMessage();
             invalidFields.put(name, message);
         }
         return handleExceptionInternal(ex, Error.builder()
@@ -43,7 +45,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({BusinessException.class})
     protected ResponseEntity<Object> handleNegocioViolation(BusinessException ex) {
-        return new ResponseEntity<Object>(Error.builder()
+        return new ResponseEntity<>(Error.builder()
                 .status(HttpStatus.BAD_REQUEST.value())
                 .title(ex.getTitle())
                 .dateTime(LocalDateTime.now())

@@ -2,11 +2,11 @@ package com.example.apibanco.api.controller;
 
 import com.example.apibanco.api.model.ClientInput;
 import com.example.apibanco.api.model.ClientPatchInput;
-import com.example.apibanco.domain.model.Client;
 import com.example.apibanco.domain.model.Account;
+import com.example.apibanco.domain.model.Client;
 import com.example.apibanco.domain.model.Manager;
-import com.example.apibanco.domain.service.ClientService;
 import com.example.apibanco.domain.service.AccountService;
+import com.example.apibanco.domain.service.ClientService;
 import com.example.apibanco.domain.service.ManagerService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -32,10 +32,10 @@ public class ManagerController {
         return managerService.saveManager(manager);
     }
 
-    @GetMapping("/{manager_id}/clients")
+    @GetMapping("/{managerId}/clients")
     @ResponseStatus(HttpStatus.OK)
-    public List<Account> listClientByManager(@PathVariable Long manager_id) {
-        return accountService.showAccountsByManager(manager_id);
+    public List<Account> listClientByManager(@PathVariable Long managerId) {
+        return accountService.showAccountsByManager(managerId);
     }
 
     @GetMapping("/clients")
@@ -45,45 +45,45 @@ public class ManagerController {
     }
 
     @Transactional
-    @PostMapping("/{manager_id}/addClient")
+    @PostMapping("/{managerId}/clients")
     @ResponseStatus(HttpStatus.CREATED)
-    public Client addClient(@Valid @RequestBody ClientInput clientInput, @PathVariable Long manager_id) {
-        return clientService.saveClient(clientInput, manager_id);
+    public Client addClient(@Valid @RequestBody ClientInput clientInput, @PathVariable Long managerId) {
+        return clientService.saveClient(clientInput, managerId);
     }
 
     @Transactional
-    @PatchMapping("/{manager_id}/updateClient/{client_id}")
+    @PatchMapping("/{managerId}/{clientId}")
     @ResponseStatus(HttpStatus.OK)
-    public Client updateClient(@Valid @RequestBody ClientPatchInput clientPatchInput, @PathVariable Long manager_id, @PathVariable Long client_id){
-        return clientService.updateClient(clientPatchInput, manager_id, client_id);
+    public Client updateClient(@Valid @RequestBody ClientPatchInput clientPatchInput, @PathVariable Long managerId, @PathVariable Long clientId) {
+        return clientService.updateClient(clientPatchInput, managerId, clientId);
     }
 
     @Transactional
-    @PatchMapping("/{manager_id}/inactivateClient/{client_id}")
+    @PatchMapping("/{managerId}/clients/{clientId}/inactivate")
     @ResponseStatus(HttpStatus.OK)
-    public Client inactivateClient(@PathVariable Long manager_id, @PathVariable Long client_id){
-        return clientService.inactivateClient(manager_id, client_id);
+    public Client inactivateClient(@PathVariable Long managerId, @PathVariable Long clientId) {
+        return clientService.inactivateClient(managerId, clientId);
     }
 
     @Transactional
-    @PatchMapping("/{manager_id}/activateClient/{client_id}")
+    @PatchMapping("/{managerId}/clients/{clientId}/activate")
     @ResponseStatus(HttpStatus.OK)
-    public Client activateClient(@PathVariable Long manager_id, @PathVariable Long client_id){
-        return clientService.activateClient(manager_id, client_id);
+    public Client activateClient(@PathVariable Long managerId, @PathVariable Long clientId) {
+        return clientService.activateClient(managerId, clientId);
     }
 
     @Transactional
-    @PatchMapping("{manager_id}/inactivate/{newManager_id}")
+    @PatchMapping("{managerId}/inactivate/{newManagerId}")
     @ResponseStatus(HttpStatus.OK)
-    public Manager inactivateManager(@PathVariable Long manager_id, @PathVariable Long newManager_id){
-        return managerService.inactivateManager(manager_id, newManager_id);
+    public Manager inactivateManager(@PathVariable Long managerId, @PathVariable Long newManagerId) {
+        return managerService.inactivateManager(managerId, newManagerId);
     }
 
     @Transactional
-    @PatchMapping("/{manager_id}/activate")
+    @PatchMapping("/{managerId}/activate")
     @ResponseStatus(HttpStatus.OK)
-    public Manager activateManager(@PathVariable Long manager_id){
-        return managerService.activateManager(manager_id);
+    public Manager activateManager(@PathVariable Long managerId) {
+        return managerService.activateManager(managerId);
     }
 }
 

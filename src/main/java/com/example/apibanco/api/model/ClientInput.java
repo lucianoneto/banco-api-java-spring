@@ -22,8 +22,8 @@ public class ClientInput {
     private String name;
 
     @NotBlank
-    @Size(max = 11, min = 11)
-    @CPF(message = "invalid cpf")
+    @Size(max = 11, min = 11, message = "cpf must be formed by 11 digits without punctuation")
+    @CPF
     @Column(unique = true)
     private String cpf;
 

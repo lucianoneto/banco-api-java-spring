@@ -26,8 +26,8 @@ public class ClientPatchInputAssembler {
                 client.getAddress().setStreet(newAddress.getStreet());
             if (newAddress.getDistrict() != null)
                 client.getAddress().setDistrict(newAddress.getDistrict());
-            if (newAddress.getCEP() != null)
-                client.getAddress().setCEP(newAddress.getCEP());
+            if (newAddress.getZipCode() != null)
+                client.getAddress().setZipCode(newAddress.getZipCode());
             if (newAddress.getNumber() != null)
                 client.getAddress().setNumber(newAddress.getNumber());
         }

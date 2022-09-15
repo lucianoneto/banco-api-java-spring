@@ -15,10 +15,10 @@ import java.util.Locale;
 public class ClientValidations {
     ClientRepository clientRepository;
     ManagerValidations managerValidations;
-    private final MessageSource messageSource;
+    private MessageSource messageSource;
 
-    public void checkInvalidFields(HashMap<String, String> invalidFields, Long manager_id, String cpf, String email) {
-        managerValidations.checkExistsManager(invalidFields, manager_id);
+    public void checkInvalidFields(HashMap<String, String> invalidFields, Long managerId, String cpf, String email) {
+        managerValidations.checkExistsManager(invalidFields, managerId);
 
         if (clientRepository.existsByCpf(cpf))
             invalidFields.put(MessagesConstants.CPF, messageSource.getMessage(MessagesConstants.CPF_REGISTERED, null, Locale.US));
@@ -28,8 +28,8 @@ public class ClientValidations {
             throw new BusinessException(MessagesConstants.GENERAL_ERROR, invalidFields);
     }
 
-    public void checkInvalidFields(HashMap<String, String> invalidFields, Long manager_id, String email) {
-        managerValidations.checkExistsManager(invalidFields, manager_id);
+    public void checkInvalidFields(HashMap<String, String> invalidFields, Long managerId, String email) {
+        managerValidations.checkExistsManager(invalidFields, managerId);
 
         if (clientRepository.existsByEmail(email))
             invalidFields.put(MessagesConstants.EMAIL, messageSource.getMessage(MessagesConstants.EMAIL_REGISTERED, null, Locale.US));

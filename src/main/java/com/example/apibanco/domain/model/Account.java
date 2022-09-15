@@ -2,17 +2,20 @@ package com.example.apibanco.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Builder
+@Accessors(chain = true)
 public class Account {
 
     @Id
@@ -20,13 +23,13 @@ public class Account {
     private Long id;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private Float balance;
+    private float balance;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private Date creationDate;
+    private LocalDate creationDate;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private Time creationTime;
+    private LocalTime creationTime;
 
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "client_id", nullable = false)

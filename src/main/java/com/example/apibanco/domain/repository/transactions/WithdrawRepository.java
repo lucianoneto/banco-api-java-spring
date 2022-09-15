@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface WithdrawRepository extends JpaRepository<Withdraw, Long> {
-    List<Withdraw> getByAccount_Id(Long id);
+    List<Withdraw> getByAccountId(Long id);
 
 
 }

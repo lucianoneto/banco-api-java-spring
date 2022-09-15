@@ -5,13 +5,14 @@ import com.example.apibanco.domain.model.Account;
 import com.example.apibanco.domain.model.transactions.Transfer;
 import com.example.apibanco.domain.repository.AccountRepository;
 import com.example.apibanco.domain.repository.transactions.TransferRepository;
-import com.example.apibanco.domain.utils.Utils;
 import com.example.apibanco.domain.validations.TransactionsValidations;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashMap;
 
 
@@ -25,7 +26,7 @@ public class TransferService {
     private ModelMapper modelMapper;
 
     @Transactional
-    public TransferSentOutput saveTransfer(Long idOriginAccount, Long idDestinyAccount, Float value) {
+    public TransferSentOutput saveTransfer(Long idOriginAccount, Long idDestinyAccount, float value) {
         HashMap<String, String> invalidFields = new HashMap<>();
 
         transactionsValidations.checkTransfer(invalidFields, value, idOriginAccount, idDestinyAccount);
@@ -33,13 +34,13 @@ public class TransferService {
         Account accountOrigem = accountRepository.getReferenceById(idOriginAccount);
         Account accountDestino = accountRepository.getReferenceById(idDestinyAccount);
 
-        Transfer transfer = Transfer.builder()
-                .value(value)
-                .date(Utils.dateNow())
-                .time(Utils.timeNow())
-                .destinyAccount(accountDestino)
-                .originAccount(accountOrigem)
-                .build();
+
+        Transfer transfer = new Transfer()
+                .setValue(value)
+                .setDate(LocalDate.now())
+                .setTime(LocalTime.now())
+                .setDestinyAccount(accountDestino)
+                .setOriginAccount(accountOrigem);
 
         accountOrigem.setBalance(accountOrigem.getBalance() - transfer.getValue());
         accountRepository.save(accountOrigem);

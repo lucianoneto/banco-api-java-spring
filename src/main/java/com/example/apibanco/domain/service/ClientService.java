@@ -7,8 +7,8 @@ import com.example.apibanco.domain.model.Client;
 import com.example.apibanco.domain.model.Manager;
 import com.example.apibanco.domain.repository.ClientRepository;
 import com.example.apibanco.domain.repository.ManagerRepository;
-import com.example.apibanco.domain.validations.ClientValidations;
 import com.example.apibanco.domain.validations.AccountValidations;
+import com.example.apibanco.domain.validations.ClientValidations;
 import com.example.apibanco.domain.validations.ManagerValidations;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -30,12 +30,12 @@ public class ClientService {
     private ClientPatchInputAssembler clientPatchInputAssembler;
     private ClientValidations clientValidations;
 
-    public Client saveClient(ClientInput clientInput, Long manager_id) {
+    public Client saveClient(ClientInput clientInput, Long managerId) {
         HashMap<String, String> invalidFields = new HashMap<>();
 
         Client client = modelMapper.map(clientInput, Client.class);
-        Manager manager = managerRepository.getReferenceById(manager_id);
-        clientValidations.checkInvalidFields(invalidFields, manager_id, client.getCpf(), client.getEmail());
+        Manager manager = managerRepository.getReferenceById(managerId);
+        clientValidations.checkInvalidFields(invalidFields, managerId, client.getCpf(), client.getEmail());
 
         client.setManager(manager);
         client.setActive(true);
@@ -45,46 +45,46 @@ public class ClientService {
         return clientRepository.save(client);
     }
 
-    public Client updateClient(ClientPatchInput clientPatchInput, Long manager_id, Long client_id) {
+    public Client updateClient(ClientPatchInput clientPatchInput, Long managerId, Long clientId) {
         HashMap<String, String> invalidFields = new HashMap<>();
 
-        accountValidations.checkInactiveClientAccount(invalidFields, client_id);
-        managerValidations.checkManagerClientRelationship(invalidFields, manager_id, client_id);
-        clientValidations.checkInvalidFields(invalidFields, manager_id, clientPatchInput.getEmail());
+        accountValidations.checkInactiveClientAccount(invalidFields, clientId);
+        managerValidations.checkManagerClientRelationship(invalidFields, managerId, clientId);
+        clientValidations.checkInvalidFields(invalidFields, managerId, clientPatchInput.getEmail());
 
-        Client client = clientRepository.getReferenceById(client_id);
+        Client client = clientRepository.getReferenceById(clientId);
 
         client = clientPatchInputAssembler.merge(clientPatchInput, client);
 
         return clientRepository.save(client);
     }
-    public Client inactivateClient(Long manager_id, Long client_id){
+
+    public Client inactivateClient(Long managerId, Long clientId) {
 
         HashMap<String, String> invalidFields = new HashMap<>();
 
-        accountValidations.checkInactiveClientAccount(invalidFields, client_id);
-        managerValidations.checkManagerClientRelationship(invalidFields, manager_id, client_id);
+        accountValidations.checkInactiveClientAccount(invalidFields, clientId);
+        managerValidations.checkManagerClientRelationship(invalidFields, managerId, clientId);
 
-        Client client = clientRepository.getReferenceById(client_id);
+        Client client = clientRepository.getReferenceById(clientId);
 
         client.setActive(false);
 
         return clientRepository.save(client);
     }
 
-    public Client activateClient(Long manager_id, Long client_id){
+    public Client activateClient(Long managerId, Long clientId) {
         HashMap<String, String> invalidFields = new HashMap<>();
 
-        accountValidations.checkActiveClientAccount(invalidFields, client_id);
-        managerValidations.checkManagerClientRelationship(invalidFields, manager_id, client_id);
+        accountValidations.checkActiveClientAccount(invalidFields, clientId);
+        managerValidations.checkManagerClientRelationship(invalidFields, managerId, clientId);
 
-        Client client = clientRepository.getReferenceById(client_id);
+        Client client = clientRepository.getReferenceById(clientId);
 
         client.setActive(true);
 
         return clientRepository.save(client);
     }
-
 
 
 }

@@ -2,6 +2,7 @@ package com.example.apibanco.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import lombok.experimental.Accessors;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
@@ -13,7 +14,7 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 @Entity
-@Builder
+@Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class Manager {
@@ -26,9 +27,9 @@ public class Manager {
     @Size(max = 70)
     private String name;
 
+    @Size(max = 11, min = 11, message = "cpf must be formed by 11 digits without punctuation")
     @NotBlank
-    @Size(max = 11, min = 11)
-    @CPF(message = "invalid cpf")
+    @CPF
     @Column(unique = true)
     private String cpf;
 

@@ -15,28 +15,28 @@ import java.util.Locale;
 public class AccountValidations {
 
     private AccountRepository accountRepository;
-    private final MessageSource messageSource;
+    private MessageSource messageSource;
 
 
-    public void checkInactiveClientAccount(HashMap<String, String> invalidFields, Long account_id){
-        checkExistsClientAccount(invalidFields, account_id);
-        if(!accountRepository.getReferenceById(account_id).getClient().getActive())
-            invalidFields.put(MessagesConstants.ID_ACCOUNT, messageSource.getMessage("account.inactive", null, Locale.US));
+    public void checkInactiveClientAccount(HashMap<String, String> invalidFields, Long accountId) {
+        checkExistsClientAccount(invalidFields, accountId);
+        if (Boolean.FALSE.equals(accountRepository.getReferenceById(accountId).getClient().getActive()))
+            invalidFields.put(MessagesConstants.ID_ACCOUNT, messageSource.getMessage(MessagesConstants.ACCOUNT_INACTIVE, null, Locale.US));
         if (!invalidFields.isEmpty())
             throw new BusinessException(messageSource.getMessage(MessagesConstants.GENERAL_ERROR, null, Locale.US), invalidFields);
     }
 
-    public void checkActiveClientAccount(HashMap<String, String> invalidFields, Long account_id){
-        checkExistsClientAccount(invalidFields, account_id);
-        if(accountRepository.getReferenceById(account_id).getClient().getActive())
-            invalidFields.put(MessagesConstants.ID_ACCOUNT, messageSource.getMessage("account.active", null, Locale.US));
+    public void checkActiveClientAccount(HashMap<String, String> invalidFields, Long accountId) {
+        checkExistsClientAccount(invalidFields, accountId);
+        if (Boolean.TRUE.equals(accountRepository.getReferenceById(accountId).getClient().getActive()))
+            invalidFields.put(MessagesConstants.ID_ACCOUNT, messageSource.getMessage(MessagesConstants.ACCOUNT_ACTIVE, null, Locale.US));
         if (!invalidFields.isEmpty())
             throw new BusinessException(messageSource.getMessage(MessagesConstants.GENERAL_ERROR, null, Locale.US), invalidFields);
     }
 
-    private void checkExistsClientAccount(HashMap<String, String> invalidFields, Long account_id){
-        if (accountRepository.findById(account_id).isEmpty())
-            invalidFields.put(MessagesConstants.ID_ACCOUNT, messageSource.getMessage("account.not.exist", null, Locale.US));
+    private void checkExistsClientAccount(HashMap<String, String> invalidFields, Long accountId) {
+        if (accountRepository.findById(accountId).isEmpty())
+            invalidFields.put(MessagesConstants.ID_ACCOUNT, messageSource.getMessage(MessagesConstants.ACCOUNT_NOT_EXIST, null, Locale.US));
         if (!invalidFields.isEmpty()) {
             throw new BusinessException(messageSource.getMessage(MessagesConstants.GENERAL_ERROR, null, Locale.US), invalidFields);
         }

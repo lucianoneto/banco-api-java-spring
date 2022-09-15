@@ -4,12 +4,13 @@ import com.example.apibanco.domain.model.Account;
 import com.example.apibanco.domain.model.transactions.Deposit;
 import com.example.apibanco.domain.repository.AccountRepository;
 import com.example.apibanco.domain.repository.transactions.DepositRepository;
-import com.example.apibanco.domain.utils.Utils;
 import com.example.apibanco.domain.validations.TransactionsValidations;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashMap;
 
 
@@ -22,18 +23,17 @@ public class DepositService {
     private TransactionsValidations transactionsValidations;
 
     @Transactional
-    public Deposit saveDeposit(Long account_id, Float depositValue) {
+    public Deposit saveDeposit(Long accountId, float depositValue) {
         HashMap<String, String> invalidFields = new HashMap<>();
 
-        transactionsValidations.checkTransaction(invalidFields, depositValue, account_id);
+        transactionsValidations.checkTransaction(invalidFields, depositValue, accountId);
 
-        Account account = accountRepository.getReferenceById(account_id);
-        Deposit deposit = Deposit.builder()
-                .value(depositValue)
-                .date(Utils.dateNow())
-                .time(Utils.timeNow())
-                .account(account)
-                .build();
+        Account account = accountRepository.getReferenceById(accountId);
+        Deposit deposit = new Deposit()
+                .setValue(depositValue)
+                .setDate(LocalDate.now())
+                .setTime(LocalTime.now())
+                .setAccount(account);
 
         account.setBalance(deposit.getValue() + account.getBalance());
 
