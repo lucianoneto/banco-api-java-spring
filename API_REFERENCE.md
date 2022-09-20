@@ -17,9 +17,9 @@
 | Parameter   | Type       | Description                           |
 | :---------- | :--------- | :---------------------------------- |
 | `name` | `string` | **Required**. New manager name. |
-| `cpf` | `string` | **Required**. New manager CPF. |
+| `cpf` | `string` | **Required**. New manager CPF (just numbers, no characters). |
 | `email` | `string` | **Required**. New manager e-mail. |
-| `phone` | `string` | **Required**. New manager phone. |
+| `phone` | `string` | **Required**. New manager phone (just numbers, no characters). |
 
 
 #### Responses
@@ -76,9 +76,9 @@
 | Parameter   | Type       | Description                           |
 | :---------- | :--------- | :---------------------------------- |
 | `name` | `string` | **Required**. New client name. |
-| `cpf` | `string` | **Required**. New client CPF. |
+| `cpf` | `string` | **Required**. New client CPF (just numbers, no characters). |
 | `email` | `string` | **Required**. New client e-mail. |
-| `phone` | `string` | **Required**. New client phone. |
+| `phone` | `string` | **Required**. New client phone (just numbers, no characters). |
 | `address` | `address` | **Required**. New client address (type specified at the end of the Documentation). |
 
 
@@ -107,7 +107,7 @@
 | Parameter   | Type       | Description                           |
 | :---------- | :--------- | :---------------------------------- |
 | `email` | `string` | **Optional**. Updated client e-mail. |
-| `phone` | `string` | **Optional**. Updated client phone. |
+| `phone` | `string` | **Optional**. Updated client phone (just numbers, no characters). |
 | `address` | `address` | **Optional**. Updated client address (type specified at the end of the Documentation). |
 
 #### Responses
@@ -284,7 +284,7 @@
 
 | Parameter   | Type       | Description                         |
 | :---------- | :--------- | :---------------------------------- |
-| `cep` | `string` | **Required**. New client CEP. |
+| `cep` | `string` | **Required**. New client CEP (just numbers, no characters). |
 | `street` | `string` | **Required**. New client street. |
 | `number` | `string` | **Required**. New client address number. |
 | `district` | `string` | **Required**. New client distrit. |
