@@ -215,7 +215,7 @@
 
 #### Request
 
-#### Body
+#### Multipart Form
 
 | Parameter   | Type       | Description                         |
 | :---------- | :--------- | :---------------------------------- |
@@ -240,7 +240,7 @@
 
 #### Request
 
-#### Body
+#### Multipart Form
 
 | Parameter   | Type       | Description                         |
 | :---------- | :--------- | :---------------------------------- |
@@ -266,7 +266,7 @@
 
 #### Responses
 
-#### Body
+#### Multipart Form
 
 | Parameter   | Type       | Description                         |
 | :---------- | :--------- | :---------------------------------- |
