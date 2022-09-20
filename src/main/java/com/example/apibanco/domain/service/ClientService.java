@@ -15,6 +15,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.Map;
 
 
 @Service
@@ -31,7 +32,7 @@ public class ClientService {
     private ClientValidations clientValidations;
 
     public Client saveClient(ClientInput clientInput, Long managerId) {
-        HashMap<String, String> invalidFields = new HashMap<>();
+        Map<String, String> invalidFields = new HashMap<>();
 
         Client client = modelMapper.map(clientInput, Client.class);
         Manager manager = managerRepository.getReferenceById(managerId);
@@ -46,7 +47,7 @@ public class ClientService {
     }
 
     public Client updateClient(ClientPatchInput clientPatchInput, Long managerId, Long clientId) {
-        HashMap<String, String> invalidFields = new HashMap<>();
+        Map<String, String> invalidFields = new HashMap<>();
 
         accountValidations.checkInactiveClientAccount(invalidFields, clientId);
         managerValidations.checkManagerClientRelationship(invalidFields, managerId, clientId);
@@ -61,7 +62,7 @@ public class ClientService {
 
     public Client inactivateClient(Long managerId, Long clientId) {
 
-        HashMap<String, String> invalidFields = new HashMap<>();
+        Map<String, String> invalidFields = new HashMap<>();
 
         accountValidations.checkInactiveClientAccount(invalidFields, clientId);
         managerValidations.checkManagerClientRelationship(invalidFields, managerId, clientId);
@@ -74,7 +75,7 @@ public class ClientService {
     }
 
     public Client activateClient(Long managerId, Long clientId) {
-        HashMap<String, String> invalidFields = new HashMap<>();
+        Map<String, String> invalidFields = new HashMap<>();
 
         accountValidations.checkActiveClientAccount(invalidFields, clientId);
         managerValidations.checkManagerClientRelationship(invalidFields, managerId, clientId);

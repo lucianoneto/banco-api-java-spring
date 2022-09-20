@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashMap;
+import java.util.Map;
 
 
 @Service
@@ -27,7 +28,7 @@ public class TransferService {
 
     @Transactional
     public TransferSentOutput saveTransfer(Long idOriginAccount, Long idDestinyAccount, float value) {
-        HashMap<String, String> invalidFields = new HashMap<>();
+        Map<String, String> invalidFields = new HashMap<>();
 
         transactionsValidations.checkTransfer(invalidFields, value, idOriginAccount, idDestinyAccount);
 

@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashMap;
+import java.util.Map;
 
 @Service
 @AllArgsConstructor
@@ -23,7 +24,7 @@ public class WithdrawService {
 
     @Transactional
     public Withdraw saveWithdraw(Long accountId, float withdrawValue) {
-        HashMap<String, String> invalidFields = new HashMap<>();
+        Map<String, String> invalidFields = new HashMap<>();
 
         transactionsValidations.checkWithdraw(invalidFields, withdrawValue, accountId);
 

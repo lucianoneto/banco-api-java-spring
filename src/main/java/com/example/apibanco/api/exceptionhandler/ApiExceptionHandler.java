@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Locale;
 
 
@@ -27,7 +28,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        HashMap<String, String> invalidFields = new HashMap<>();
+        Map<String, String> invalidFields = new HashMap<>();
         for (ObjectError problem : ex.getBindingResult().getAllErrors()) {
             String name = ((FieldError) problem).getField();
             String message;

@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
+import java.util.Map;
 
 
 @Getter
@@ -16,6 +16,6 @@ public class Error {
     private Integer status;
     private LocalDateTime dateTime;
     private String title;
-    private HashMap<String, String> invalidFields;
+    private Map<String, String> invalidFields;
 
 }

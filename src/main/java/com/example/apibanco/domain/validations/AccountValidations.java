@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
+import java.util.Map;
 import java.util.Locale;
 
 @Component
@@ -18,7 +18,7 @@ public class AccountValidations {
     private MessageSource messageSource;
 
 
-    public void checkInactiveClientAccount(HashMap<String, String> invalidFields, Long accountId) {
+    public void checkInactiveClientAccount(Map<String, String> invalidFields, Long accountId) {
         checkExistsClientAccount(invalidFields, accountId);
         if (Boolean.FALSE.equals(accountRepository.getReferenceById(accountId).getClient().getActive()))
             invalidFields.put(MessagesConstants.ID_ACCOUNT, messageSource.getMessage(MessagesConstants.ACCOUNT_INACTIVE, null, Locale.US));
@@ -26,7 +26,7 @@ public class AccountValidations {
             throw new BusinessException(messageSource.getMessage(MessagesConstants.GENERAL_ERROR, null, Locale.US), invalidFields);
     }
 
-    public void checkActiveClientAccount(HashMap<String, String> invalidFields, Long accountId) {
+    public void checkActiveClientAccount(Map<String, String> invalidFields, Long accountId) {
         checkExistsClientAccount(invalidFields, accountId);
         if (Boolean.TRUE.equals(accountRepository.getReferenceById(accountId).getClient().getActive()))
             invalidFields.put(MessagesConstants.ID_ACCOUNT, messageSource.getMessage(MessagesConstants.ACCOUNT_ACTIVE, null, Locale.US));
@@ -34,7 +34,7 @@ public class AccountValidations {
             throw new BusinessException(messageSource.getMessage(MessagesConstants.GENERAL_ERROR, null, Locale.US), invalidFields);
     }
 
-    private void checkExistsClientAccount(HashMap<String, String> invalidFields, Long accountId) {
+    private void checkExistsClientAccount(Map<String, String> invalidFields, Long accountId) {
         if (accountRepository.findById(accountId).isEmpty())
             invalidFields.put(MessagesConstants.ID_ACCOUNT, messageSource.getMessage(MessagesConstants.ACCOUNT_NOT_EXIST, null, Locale.US));
         if (!invalidFields.isEmpty()) {

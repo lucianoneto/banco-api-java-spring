@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,7 +47,7 @@ public class AccountService {
     }
 
     public StatementInput showBankStatement(Long accountId) {
-        HashMap<String, String> invalidFields = new HashMap<>();
+        Map<String, String> invalidFields = new HashMap<>();
 
         accountValidations.checkInactiveClientAccount(invalidFields, accountId);
 
@@ -68,7 +69,7 @@ public class AccountService {
     }
 
     public List<Account> showAccountsByManager(Long managerId) {
-        HashMap<String, String> invalidFields = new HashMap<>();
+        Map<String, String> invalidFields = new HashMap<>();
         managerValidations.checkExistsManager(invalidFields, managerId);
         return accountRepository.findAccountByClientManagerId(managerId);
     }

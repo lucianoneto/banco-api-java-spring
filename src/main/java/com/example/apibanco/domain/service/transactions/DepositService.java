@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashMap;
+import java.util.Map;
 
 
 @Service
@@ -24,7 +25,7 @@ public class DepositService {
 
     @Transactional
     public Deposit saveDeposit(Long accountId, float depositValue) {
-        HashMap<String, String> invalidFields = new HashMap<>();
+        Map<String, String> invalidFields = new HashMap<>();
 
         transactionsValidations.checkTransaction(invalidFields, depositValue, accountId);
 

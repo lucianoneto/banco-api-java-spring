@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
+import java.util.Map;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -20,7 +20,7 @@ public class ManagerValidations {
     private ClientRepository clientRepository;
     private MessageSource messageSource;
 
-    public void checkInactiveManager(HashMap<String, String> invalidFields, Long managerId, Long newManagerId) {
+    public void checkInactiveManager(Map<String, String> invalidFields, Long managerId, Long newManagerId) {
         checkExistsManager(invalidFields, managerId);
         checkExistsNewManager(invalidFields, newManagerId);
 
@@ -34,7 +34,7 @@ public class ManagerValidations {
             throw new BusinessException(messageSource.getMessage(MessagesConstants.GENERAL_ERROR, null, Locale.US), invalidFields);
     }
 
-    public void checkActiveManager(HashMap<String, String> invalidFields, Long managerId) {
+    public void checkActiveManager(Map<String, String> invalidFields, Long managerId) {
         checkExistsManager(invalidFields, managerId);
 
         if (Boolean.TRUE.equals(managerRepository.getReferenceById(managerId).getActive()))
@@ -43,7 +43,7 @@ public class ManagerValidations {
             throw new BusinessException(messageSource.getMessage(MessagesConstants.GENERAL_ERROR, null, Locale.US), invalidFields);
     }
 
-    public void checkManagerClientRelationship(HashMap<String, String> invalidFields, Long managerId, Long clientId) {
+    public void checkManagerClientRelationship(Map<String, String> invalidFields, Long managerId, Long clientId) {
         checkExistsManager(invalidFields, managerId);
 
         if (Boolean.FALSE.equals(managerRepository.getReferenceById(managerId).getActive()))
@@ -54,21 +54,21 @@ public class ManagerValidations {
             throw new BusinessException(messageSource.getMessage(MessagesConstants.GENERAL_ERROR, null, Locale.US), invalidFields);
     }
 
-    public void checkExistsManager(HashMap<String, String> invalidFields, Long managerId) {
+    public void checkExistsManager(Map<String, String> invalidFields, Long managerId) {
         if (managerRepository.findById(managerId).isEmpty())
             invalidFields.put(MessagesConstants.ID_MANAGER, messageSource.getMessage(MessagesConstants.MANAGER_NOT_EXIST, null, Locale.US));
         if (!invalidFields.isEmpty())
             throw new BusinessException(messageSource.getMessage(MessagesConstants.GENERAL_ERROR, null, Locale.US), invalidFields);
     }
 
-    private void checkExistsNewManager(HashMap<String, String> invalidFields, Long newManagerId) {
+    private void checkExistsNewManager(Map<String, String> invalidFields, Long newManagerId) {
         if (managerRepository.findById(newManagerId).isEmpty())
             invalidFields.put(MessagesConstants.ID_NEW_MANAGER, messageSource.getMessage(MessagesConstants.MANAGER_NOT_EXIST, null, Locale.US));
         if (!invalidFields.isEmpty())
             throw new BusinessException(messageSource.getMessage(MessagesConstants.GENERAL_ERROR, null, Locale.US), invalidFields);
     }
 
-    public void checkInvalidFields(HashMap<String, String> invalidFields, String cpf, String email) {
+    public void checkInvalidFields(Map<String, String> invalidFields, String cpf, String email) {
         if (managerRepository.existsByCpf(cpf))
             invalidFields.put(MessagesConstants.CPF, messageSource.getMessage(MessagesConstants.CPF_REGISTERED, null, Locale.US));
         if (managerRepository.existsByEmail(email))

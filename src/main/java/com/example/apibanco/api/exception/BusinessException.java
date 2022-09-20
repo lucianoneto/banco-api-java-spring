@@ -3,15 +3,15 @@ package com.example.apibanco.api.exception;
 
 import lombok.Getter;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class BusinessException extends RuntimeException {
     @Getter
-    private HashMap<String, String> invalidFields;
+    private final Map<String, String> invalidFields;
     @Getter
-    private String title;
+    private final String title;
 
-    public BusinessException(String title, HashMap<String, String> invalidFields) {
+    public BusinessException(String title, Map<String, String> invalidFields) {
         this.title = title;
         this.invalidFields = invalidFields;
     }

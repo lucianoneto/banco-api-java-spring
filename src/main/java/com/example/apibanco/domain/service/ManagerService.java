@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
 
 
@@ -23,7 +24,7 @@ public class ManagerService {
 
     @Transactional
     public Manager saveManager(Manager manager) {
-        HashMap<String, String> invalidFields = new HashMap<>();
+        Map<String, String> invalidFields = new HashMap<>();
 
         managerValidations.checkInvalidFields(invalidFields, manager.getCpf(), manager.getEmail());
         manager.setActive(true);
@@ -31,7 +32,7 @@ public class ManagerService {
     }
 
     public Manager inactivateManager(Long managerId, Long newManagerId) {
-        HashMap<String, String> invalidFields = new HashMap<>();
+        Map<String, String> invalidFields = new HashMap<>();
         managerValidations.checkInactiveManager(invalidFields, managerId, newManagerId);
 
         managerRepository.getReferenceById(managerId).setActive(false);
@@ -48,7 +49,7 @@ public class ManagerService {
     }
 
     public Manager activateManager(Long managerId) {
-        HashMap<String, String> invalidFields = new HashMap<>();
+        Map<String, String> invalidFields = new HashMap<>();
         managerValidations.checkActiveManager(invalidFields, managerId);
         managerRepository.getReferenceById(managerId).setActive(true);
 

@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
+import java.util.Map;
 import java.util.Locale;
 
 @Component
@@ -17,7 +17,7 @@ public class ClientValidations {
     ManagerValidations managerValidations;
     private MessageSource messageSource;
 
-    public void checkInvalidFields(HashMap<String, String> invalidFields, Long managerId, String cpf, String email) {
+    public void checkInvalidFields(Map<String, String> invalidFields, Long managerId, String cpf, String email) {
         managerValidations.checkExistsManager(invalidFields, managerId);
 
         if (clientRepository.existsByCpf(cpf))
@@ -28,7 +28,7 @@ public class ClientValidations {
             throw new BusinessException(MessagesConstants.GENERAL_ERROR, invalidFields);
     }
 
-    public void checkInvalidFields(HashMap<String, String> invalidFields, Long managerId, String email) {
+    public void checkInvalidFields(Map<String, String> invalidFields, Long managerId, String email) {
         managerValidations.checkExistsManager(invalidFields, managerId);
 
         if (clientRepository.existsByEmail(email))
