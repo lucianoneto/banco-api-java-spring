@@ -3,7 +3,6 @@ package com.example.apibanco.api.controller;
 import com.example.apibanco.api.model.StatementInput;
 import com.example.apibanco.api.model.TransferSentOutput;
 import com.example.apibanco.domain.model.transactions.Deposit;
-import com.example.apibanco.domain.model.transactions.Transfer;
 import com.example.apibanco.domain.model.transactions.Withdraw;
 import com.example.apibanco.domain.service.AccountService;
 import com.example.apibanco.domain.service.transactions.DepositService;
@@ -42,15 +41,15 @@ public class AccountController {
     @Transactional
     @PostMapping("/{accountId}/withdraw")
     @ResponseStatus(HttpStatus.OK)
-    public Withdraw toWithdraw(@PathVariable Long accountId, @RequestBody Withdraw withdraw) {
-        return withdrawService.saveWithdraw(accountId, withdraw.getValue());
+    public Withdraw toWithdraw(@PathVariable Long accountId, @RequestParam float value) {
+        return withdrawService.saveWithdraw(accountId, value);
     }
 
     @Transactional
     @PostMapping("/{originAccountId}/transfer/{destinyAccountId}")
     @ResponseStatus(HttpStatus.OK)
-    public TransferSentOutput toTransfer(@Valid @PathVariable Long originAccountId, @PathVariable Long destinyAccountId, @RequestBody Transfer transfer) {
-        return transferService.saveTransfer(originAccountId, destinyAccountId, transfer.getValue());
+    public TransferSentOutput toTransfer(@Valid @PathVariable Long originAccountId, @PathVariable Long destinyAccountId, @RequestParam float value) {
+        return transferService.saveTransfer(originAccountId, destinyAccountId, value);
     }
 
 }

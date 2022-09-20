@@ -3,8 +3,8 @@ package com.example.apibanco.api.model;
 
 import lombok.Data;
 
-import java.sql.Date;
-import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Data
 public class TransferSentOutput {
@@ -13,9 +13,9 @@ public class TransferSentOutput {
 
     private Long idDestinyAccount;
 
-    private Time time;
+    private LocalTime time;
 
-    private Date date;
+    private LocalDate date;
 
 
 }

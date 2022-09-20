@@ -7,8 +7,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
-import java.util.Map;
 import java.util.Locale;
+import java.util.Map;
 
 @Component
 @AllArgsConstructor

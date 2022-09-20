@@ -1,4 +1,4 @@
-package com.example.apibanco.commom;
+package com.example.apibanco.common;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
