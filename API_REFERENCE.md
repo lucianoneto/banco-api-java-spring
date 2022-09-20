@@ -33,12 +33,12 @@
 ##### Lists all clients registered by a specific manager.
 
 ```http
-  GET /{manager_id}/clients
+  GET /{managerId}/clients
 ```
 
 | Parameter   | Type       | Description                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `manager_id`      | `long` | **Required**. Manager ID. |
+| `managerId`      | `long` | **Required**. Manager ID. |
 
 
 #### Responses
@@ -62,12 +62,12 @@
 ##### Creates a new Client.
 
 ```http
-  POST /managers/{manager_id}/addClient
+  POST /managers/{managerId}/addClient
 ```
 
 | Parameter   | Type       | Description                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `manager_id`      | `long` | **Required**. Manager ID. |
+| `managerId`      | `long` | **Required**. Manager ID. |
 
 #### Request
 
@@ -92,13 +92,13 @@
 ##### Updates an existent Client.
 
 ```http
-  PATCH /managers/{manager_id}/updateClient/{client_id}
+  PATCH /managers/{managerId}/{clientId}
 ```
 
 | Parameter   | Type       | Description                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `manager_id`      | `long` | **Required**. Manager ID. |
-|   `client_id`   |   `long` |  **Required**. Client ID.              |
+| `managerId`      | `long` | **Required**. Manager ID. |
+| `clientId`   |   `long` |  **Required**. Client ID.              |
 
 #### Request
 
@@ -120,13 +120,13 @@
 ##### Inactivates a existent client.
 
 ```http
-  PATCH /managers/{manager_id}/inactivateClient/{client_id}
+  PATCH /managers/{managerId}/clients/{clientId}/inactivate
 ```
 
 | Parameter   | Type       | Description                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `manager_id`      | `long` | **Required**. Manager ID. |
-| `client_id`      | `long` | **Required**. Client ID. |
+| `managerId`      | `long` | **Required**. Manager ID. |
+| `clientId`      | `long` | **Required**. Client ID. |
 
 #### Responses
 
@@ -138,12 +138,12 @@
 ##### Activates an existing inactivated client.
 
 ```http
-  PATCH /managers/{manager_id}/activateClient/{client_id}
+  PATCH /managers/{managerId}/clients/{clientId}/activate
 ```
 | Parameter    | Type       | Description                                   |
 |:-------------| :--------- | :------------------------------------------ |
-| `manager_id` | `long` | **Required**. Manager ID. |
-| `client_id`  | `long` | **Required**. Client ID. |
+| `managerId` | `long` | **Required**. Manager ID. |
+| `clientId`  | `long` | **Required**. Client ID. |
 
 #### Responses
 
@@ -155,28 +155,28 @@
 ##### Inactivates an existing manager, where its clients are transferred to another existing active manager.
 
 ```http
-  PATCH /managers/{manager_id}/inactivate/{newManager_id}
+  PATCH /managers/{managerId}/inactivate/{newManagerId}
 ```
 | Parameter   | Type       | Description                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `manager_id`      | `long` | **Required**. Current manager ID. |
-| `newManager_id`      | `long` | **Required**. New manager ID. |
+| `managerId`      | `long` | **Required**. Current manager ID. |
+| `newManagerId`      | `long` | **Required**. New manager ID. |
 
 #### Responses
 
 - 200 - Manager inactivated successfuly.
 - 400 - Response in the "Default Responses" topic at the end of the Documentation.
-- 
+
 ### Activate Managers
 
 #####  Actives an existing manager inactivated
 
 ```http
-  PATCH /managers/{manager_id}/activate
+  PATCH /managers/{managerId}/activate
 ```
 | Parameter   | Type       | Description                                 |
 | :---------- | :--------- | :------------------------------------------ |
-| `manager_id`      | `long` | **Required**. Manager ID. |
+| `managerId`      | `long` | **Required**. Manager ID. |
 
 #### Responses
 
@@ -190,11 +190,11 @@
 ##### Lists all performed transactions on client's account.
 
 ```http
-  GET /accounts/{account_id}/statement
+  GET /accounts/{accountId}/statement
 ```
 | Parameter   | Type       | Description                            |
 | :---------- | :--------- | :------------------------------------------ |
-| `account_id`      | `long` | **Required**. Account ID. |
+| `accountId`      | `long` | **Required**. Account ID. |
 
 #### Responses
 
@@ -206,16 +206,16 @@
 ##### Make deposits into an account.
 
 ```http
-  POST /accounts/{account_id}/deposits
+  POST /accounts/{accountId}/deposit
 ```
 
 | Parameter   | Type       | Description                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `account_id`      | `long` | **Required**. Account ID. |
+| `accountId`      | `long` | **Required**. Account ID. |
 
 #### Request
 
-#### Body
+#### Multipart Form
 
 | Parameter   | Type       | Description                         |
 | :---------- | :--------- | :---------------------------------- |
@@ -231,16 +231,16 @@
 ##### Make withdraws into an account.
 
 ```http
-  POST /accounts/{account_id}/withdraws
+  POST /accounts/{accountId}/withdraw
 ```
 
 | Parameter   | Type       | Description                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `account_id`      | `long` | **Required**. Account ID. |
+| `accountId`      | `long` | **Required**. Account ID. |
 
 #### Request
 
-#### Body
+#### Multipart Form
 
 | Parameter   | Type       | Description                         |
 | :---------- | :--------- | :---------------------------------- |
@@ -256,17 +256,17 @@
 ##### Make transfers from one account to another.
 
 ```http
-  POST /accounts/{originAccount_id}/transfers/{destinyAccount_id}
+  POST /accounts/{originAccountId}/transfer/{destinyAccountId}
 ```
 
 | Parameter   | Type       | Description                               |
 | :---------- | :--------- | :------------------------------------------ |
-| `originAccount_id`      | `long` | **Required**. Origin account ID. |
-| `destinyAccount_id`      | `long` | **Required**. Destiny account ID. |
+| `originAccountId`      | `long` | **Required**. Origin account ID. |
+| `destinyAccountId`      | `long` | **Required**. Destiny account ID. |
 
 #### Responses
 
-#### Body
+#### Multipart Form
 
 | Parameter   | Type       | Description                         |
 | :---------- | :--------- | :---------------------------------- |
