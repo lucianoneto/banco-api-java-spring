@@ -36,4 +36,11 @@ public class ClientValidations {
         if (!invalidFields.isEmpty())
             throw new BusinessException(messageSource.getMessage(MessagesConstants.GENERAL_ERROR, null, Locale.US), invalidFields);
     }
+
+    public void checkInvalidZipCode(Map<String, String> invalidFields, String zipCode){
+        if(zipCode.length() != 8)
+            invalidFields.put(MessagesConstants.ZIPCODE, messageSource.getMessage(MessagesConstants.ZIPCODE_INVALID, null, Locale.US));
+        if (!invalidFields.isEmpty())
+            throw new BusinessException(messageSource.getMessage(MessagesConstants.GENERAL_ERROR, null, Locale.US), invalidFields);
+    }
 }

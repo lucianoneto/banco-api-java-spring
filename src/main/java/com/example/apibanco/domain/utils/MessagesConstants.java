@@ -17,6 +17,7 @@ public class MessagesConstants {
     public static final String EMAIL_REGISTERED = "email.registered";
     public static final String VALUE_INVALID = "value.invalid";
     public static final String VALUE_ENOUGH = "value.enough";
+    public static final String ZIPCODE_INVALID = "zipcode.invalid";
 
     public static final String ID_MANAGER = "/idManager";
     public static final String ID_NEW_MANAGER = "/idNewManager";
@@ -27,4 +28,5 @@ public class MessagesConstants {
     public static final String VALUE = "value";
     public static final String VALUE_WITHDRAW = "valueWithdraw";
     public static final String VALUE_TRANSFER = "valueTransfer";
+    public static final String ZIPCODE = "zipCode";
 }

@@ -41,6 +41,7 @@ public class ClientService {
         client.setManager(manager);
         client.setActive(true);
 
+        clientValidations.checkInvalidZipCode(invalidFields, client.getAddress().getZipCode());
         accountService.saveAccount(client);
 
         return clientRepository.save(client);
